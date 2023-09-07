@@ -1,46 +1,30 @@
-import { useState, useEffect } from "react";
-import { Product } from "./models/product";
+import { useState } from 'react';
+// import my components
+import Catalog from "../features/catalog/Catalog";
+import Header from "./layout/Header";
+// mui imports
+import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 const App = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, []);
-
-  const addProduct = () => {
-    const newProduct = { 
-      id: products.length + 1,
-      name: 'new product',
-      description: 'some description',
-      price: products.length * 100,
-      pictureUrl: '',
-      brand: 'None',
-      quantityInStock: 100
-    };
-    setProducts((previousProducts) => {
-      return [...previousProducts, newProduct];
-    });
+  const [darkMode, setDarkMode] = useState(true);
+  const toggleTheme = () => {
+    setDarkMode((m) => !m);
   }
 
-  const renderedProducts = products.map((product) => {
-    return(
-      <li key={product.id}>
-        {product.name} - ${product.price}
-      </li>
-    );
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light'
+    }
   });
 
   return (
-    <div className="app">
-     <h1>E KOMM</h1>
-     <ul>
-      {renderedProducts}
-     </ul>
-     <button onClick={addProduct}>Add product</button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+      <Container>
+        <Catalog />
+      </Container>
+    </ThemeProvider>
   )
 }
 
