@@ -15,7 +15,12 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
             E-KOMM
           </Typography>
           <IconButton onClick={toggleTheme} sx={{ ml: 'auto' }}>
-            {darkMode ? <LightMode titleAccess="Switch to light mode"/> : <DarkMode titleAccess="Switch to dark mode"/> }
+            { darkMode 
+              ? 
+              <LightMode titleAccess="Switch to light mode"/> 
+              : 
+              <DarkMode titleAccess="Switch to dark mode"/> 
+            }
           </IconButton>
         </Toolbar>
       </AppBar>
