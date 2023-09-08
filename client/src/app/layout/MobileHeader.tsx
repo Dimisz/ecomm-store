@@ -1,5 +1,5 @@
 import { LightMode, DarkMode, Login } from "@mui/icons-material";
-import { Box, IconButton, Menu, Typography } from "@mui/material";
+import { Box, IconButton, Menu, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useState } from "react";
@@ -33,56 +33,57 @@ const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rig
   };
 
   return(
-    <>
-    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-      <IconButton
-        size="large"
-        aria-label="site navigation menu"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleOpenNavMenu}
-        color="inherit"
-      >
-        <MenuIcon />
-      </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorElNav}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        open={Boolean(anchorElNav)}
-        onClose={handleCloseNavMenu}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-        }}
-      >
-        {renderLinks(midSectionLinks, handleCloseNavMenu)}
-      </Menu>
-    </Box><Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-        <Typography
-          variant='h6'
-          component={NavLink}
-          to='/'
+    <Toolbar sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box display='flex' alignItems='center'>
+        <IconButton
+          size="large"
+          aria-label="site navigation menu"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleOpenNavMenu}
+          color="inherit"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorElNav}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          open={Boolean(anchorElNav)}
+          onClose={handleCloseNavMenu}
           sx={{
-            color: 'inherit',
-            textDecoration: 'none',
+            display: { xs: 'block', md: 'none' },
           }}
         >
-          E-KOMM
-        </Typography>
-      </Box><Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-
+          {renderLinks(midSectionLinks, handleCloseNavMenu)}
+        </Menu>
+      </Box>
+      
+      <Typography
+        variant='h6'
+        component={NavLink}
+        to='/'
+        sx={{
+          color: 'inherit',
+          textDecoration: 'none'
+        }}
+      >
+        E-KOMM
+      </Typography>
+      
+      <Box display={{ xs: 'flex', md: 'none' }} alignItems='center'>
         <IconButton
           size='large'
           onClick={toggleTheme}
-          sx={{ display: { xs: 'flex', md: 'none' }, ml: 'auto' }}>
+        >
           {darkMode
             ?
             <LightMode titleAccess="Switch to light mode" />
@@ -120,7 +121,8 @@ const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rig
         >
           {renderLinks(rightSectionLinks, handleCloseUserMenu)}
         </Menu>
-      </Box></>
+      </Box>
+    </Toolbar>
   );
 }
 
