@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // import my components
 import Header from "./layout/Header";
+// import ResponsiveAppBar from './layout/ResponsiveHeader';
 // mui imports
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet } from 'react-router-dom';
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      
       <Header darkMode={darkMode} toggleTheme={toggleTheme} />
       <Container>
         <Outlet />
