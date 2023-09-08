@@ -1,8 +1,8 @@
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
-import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Badge, Box, IconButton, List, ListItem, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, IconButton, List, ListItem, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useState } from 'react';
+
+import MobileHeader from "./MobileHeader";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -39,23 +39,6 @@ interface Props {
 const Header = ({ darkMode, toggleTheme }: Props) => {
   const renderedMidSectionLinks = renderLinks(midSectionLinks);
   const renderedRightSectionLinks = renderLinks(rightSectionLinks);
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return(
     <>
@@ -81,75 +64,22 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
                 <DarkMode titleAccess="Switch to dark mode"/> 
               }
             </IconButton>
-
-
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {
-                  renderLinks(midSectionLinks, handleCloseNavMenu)
-                }
-              </Menu>
-            </Box>
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <Typography
-              variant='h6'
-              component={NavLink}
-              to='/'
-              sx={{
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              E-KOMM
-            </Typography>
-          </Box>
-          
+            
+            {/* NavBar for small-screen devices extracted to a separate component */}
+            <MobileHeader
+              darkMode= {darkMode}
+              toggleTheme={toggleTheme}
+              renderLinks={renderLinks} 
+              midSectionLinks={midSectionLinks} 
+              rightSectionLinks={rightSectionLinks}
+            />
           
 
           {/* displayed on large screens */}
           <List sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
            {renderedMidSectionLinks}
           </List>
-          <IconButton 
-            size='large' 
-            onClick={toggleTheme} 
-            sx={{ display: { xs: 'flex', md: 'none' }, ml: 'auto' } }>
-            { darkMode 
-              ? 
-              <LightMode titleAccess="Switch to light mode"/> 
-              : 
-              <DarkMode titleAccess="Switch to dark mode"/> 
-            }
-          </IconButton>
-          <IconButton size='large' edge='start' color='inherit' sx={{ mr: 2 }}>
+          <IconButton size='large' edge='start' color='inherit' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Badge badgeContent='4' color='secondary'>
               <ShoppingCart />
             </Badge>
