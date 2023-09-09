@@ -53,7 +53,7 @@ const ProductDetails = () => {
               </TableRow>
               <TableRow>
                 <TableCell>Description</TableCell>
-                <TableCell>{product.description}</TableCell>
+                <TableCell sx={{ textAlign: 'justify' }}>{product.description}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Type</TableCell>
