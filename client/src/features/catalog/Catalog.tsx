@@ -11,10 +11,10 @@ const Catalog = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    agent.Catalog.list().then((products) => {
-      setProducts(products);
-      setLoading(false);
-    });
+    agent.Catalog.list()
+      .then((products) => setProducts(products))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
   }, []);
 
   if(loading) return <Loader message='Loading products...' />;
