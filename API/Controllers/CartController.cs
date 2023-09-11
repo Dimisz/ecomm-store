@@ -16,31 +16,19 @@ namespace API.Controllers
 
         // ENDPOINTS
         // fetch a cart
-        [HttpGet]
+        [HttpGet(Name = "GetCart")]
         public async Task<ActionResult<CartDto>> GetCart()
         {
             Cart cart = await RetrieveCart();
 
             if (cart == null) return NotFound();
-            return new CartDto
-            {
-                Id = cart.Id,
-                BuyerId = cart.BuyerId,
-                Items = cart.Items.Select(item => new CartItemDto
-                {
-                    ProductId = item.ProductId,
-                    Name = item.Product.Name,
-                    Price = item.Product.Price,
-                    PictureUrl = item.Product.PictureUrl,
-                    Type = item.Product.Type,
-                    Brand = item.Product.Brand,
-                    Quantity = item.Quantity
-                }).ToList()
-            };
+            return MapCartToDto(cart);
         }
+
+
         // add a product to the cart
         [HttpPost] // args coming from 'api/basket?productId=3&quantity=2'
-        public async Task<ActionResult> AddItemToCart(int productId, int quantity)
+        public async Task<ActionResult<CartDto>> AddItemToCart(int productId, int quantity)
         {
             // get cart
             // if user doesn't have cart (first product added) -> create a cart
@@ -55,7 +43,7 @@ namespace API.Controllers
 
             // save changes
             bool result = await _context.SaveChangesAsync() > 0;
-            if (result) return StatusCode(201);
+            if (result) return CreatedAtRoute("GetCart", MapCartToDto(cart));
             return BadRequest(new ProblemDetails { Title = "Problem saving item to cart" });
         }
         // remove a product from the cart
@@ -80,7 +68,7 @@ namespace API.Controllers
             // save changes
             bool result = await _context.SaveChangesAsync() > 0;
             if (result) return StatusCode(201);
-            return BadRequest(new ProblemDetails { Title = "Problem saving item to cart" });
+            return BadRequest(new ProblemDetails { Title = "Problem removing item from the cart" });
         }
 
         // helper method to get cart
@@ -104,6 +92,25 @@ namespace API.Controllers
             Cart cart = new Cart { BuyerId = buyerId };
             _context.Carts.Add(cart);
             return cart;
+        }
+
+        private CartDto MapCartToDto(Cart cart)
+        {
+            return new CartDto
+            {
+                Id = cart.Id,
+                BuyerId = cart.BuyerId,
+                Items = cart.Items.Select(item => new CartItemDto
+                {
+                    ProductId = item.ProductId,
+                    Name = item.Product.Name,
+                    Price = item.Product.Price,
+                    PictureUrl = item.Product.PictureUrl,
+                    Type = item.Product.Type,
+                    Brand = item.Product.Brand,
+                    Quantity = item.Quantity
+                }).ToList()
+            };
         }
 
     }

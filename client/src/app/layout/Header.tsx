@@ -1,6 +1,6 @@
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import MobileHeader from "./MobileHeader";
 
@@ -93,7 +93,13 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
           {/* right hand section */}
 
           <Box display='flex' alignItems='center'>
-            <IconButton size='large' edge='start' color='inherit'>
+            <IconButton 
+              component={Link}
+              to='/cart'
+              size='large' 
+              edge='start' 
+              color='inherit'
+            >
               <Badge badgeContent='4' color='secondary'>
                 <ShoppingCart />
               </Badge>
