@@ -1,25 +1,46 @@
-import { useState, useEffect } from "react";
-import { Cart } from "../../app/models/cart";
-import agent from "../../app/api/agent";
-import Loader from "../../app/layout/Loader";
-import { Typography } from "@mui/material";
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
+import { useStoreContext } from "../../app/context/StoreContext";
 
 const CartPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState<Cart | null>(null);
-
-  useEffect(() => {
-    agent.Cart.get()
-      .then((retrievedCart) => setCart(retrievedCart))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if(loading) return <Loader message="Loading basket..." />
+  const { cart } = useStoreContext();
+  
   if(!cart) return <Typography variant='h3'>Your cart is empty</Typography>;
 
   return(
-    <h1>Buyer id: {cart.buyerId}</h1>
+    <TableContainer component={Paper}>
+      <Table aria-label="cart contents">
+        <TableHead>
+          <TableRow>
+            <TableCell>Product</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Subtotal</TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cart.items.map((item) => (
+            <TableRow
+              key={item.productId}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {item.name}
+              </TableCell>
+              <TableCell align="right">${(item.price).toFixed(2)}</TableCell>
+              <TableCell align="right">{item.quantity}</TableCell>
+              <TableCell align="right">${(item.price * item.quantity).toFixed(2)}</TableCell>
+              <TableCell align="right">
+                <IconButton color='error'>
+                  <Delete />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

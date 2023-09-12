@@ -4,6 +4,7 @@ import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import agent from "../../app/api/agent";
+import { useStoreContext } from "../../app/context/StoreContext";
 
 interface Props {
   product: Product;
@@ -11,10 +12,12 @@ interface Props {
 
 const ProductCard = ({product}: Props) => {
   const [loading, setLoading] = useState(false);
-  
+  const { setCart } = useStoreContext();
+
   const handleAddItem = (productId: number) => {
     setLoading(true);
     agent.Cart.addItem(productId)
+      .then((cart) => setCart(cart))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }
@@ -51,7 +54,7 @@ const ProductCard = ({product}: Props) => {
             size="small" 
             onClick={() => handleAddItem(product.id)}
             loading={loading}
-            loadingIndicator="Loading…" 
+            loadingIndicator="Adding…" 
         >
           Add to cart
         </LoadingButton>

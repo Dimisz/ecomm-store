@@ -3,6 +3,7 @@ import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } f
 import { Link, NavLink } from "react-router-dom";
 
 import MobileHeader from "./MobileHeader";
+import { useStoreContext } from "../context/StoreContext";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -21,6 +22,11 @@ interface Props {
 }
 
 const Header = ({ darkMode, toggleTheme }: Props) => {
+  const { cart } = useStoreContext();
+  const itemsCount = cart?.items.reduce((totalQty, item) => {
+    return totalQty + item.quantity; 
+  }, 0);
+
   const renderLinks = (links: { title: string; path: string; }[], onClick?: () => void ) => {
     return links.map(({ title, path }) => {
       return(
@@ -100,7 +106,7 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
               edge='start' 
               color='inherit'
             >
-              <Badge badgeContent='4' color='secondary'>
+              <Badge badgeContent={itemsCount} color='secondary'>
                 <ShoppingCart />
               </Badge>
             </IconButton>
