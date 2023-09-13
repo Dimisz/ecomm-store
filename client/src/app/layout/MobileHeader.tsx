@@ -1,9 +1,9 @@
-import { LightMode, DarkMode, Login } from "@mui/icons-material";
-import { Box, IconButton, Menu, Toolbar, Typography } from "@mui/material";
+import { LightMode, DarkMode, Login, ShoppingCart } from "@mui/icons-material";
+import { Badge, Box, IconButton, Menu, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 interface Props {
   darkMode: boolean;
@@ -11,9 +11,17 @@ interface Props {
   renderLinks: (links: { title: string; path: string; }[], handler: () => void ) => React.ReactNode;
   midSectionLinks: { title: string; path: string; }[];
   rightSectionLinks: { title: string; path: string; }[];
+  itemsCount: number | undefined;
 }
 
-const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rightSectionLinks }: Props) => {
+const MobileHeader = ({ 
+  darkMode, 
+  toggleTheme, 
+  renderLinks, 
+  midSectionLinks, 
+  rightSectionLinks,
+  itemsCount
+ }: Props) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -65,6 +73,17 @@ const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rig
         >
           {renderLinks(midSectionLinks, handleCloseNavMenu)}
         </Menu>
+        
+        <IconButton
+          size='large'
+          onClick={toggleTheme}
+        >
+          {darkMode
+            ?
+            <LightMode titleAccess="Switch to light mode" />
+            :
+            <DarkMode titleAccess="Switch to dark mode" />}
+        </IconButton>
       </Box>
       
       <Typography
@@ -80,7 +99,7 @@ const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rig
       </Typography>
       
       <Box display={{ xs: 'flex', md: 'none' }} alignItems='center'>
-        <IconButton
+        {/* <IconButton
           size='large'
           onClick={toggleTheme}
         >
@@ -89,8 +108,19 @@ const MobileHeader = ({ darkMode, toggleTheme, renderLinks, midSectionLinks, rig
             <LightMode titleAccess="Switch to light mode" />
             :
             <DarkMode titleAccess="Switch to dark mode" />}
+        </IconButton> */}
+        <IconButton 
+          // sx={{ marginLeft: 1, marginRight: 1 }}
+          component={Link}
+          to='/cart'
+          size='large' 
+          edge='start' 
+          color='inherit'
+        >
+          <Badge badgeContent={itemsCount} color='secondary'>
+            <ShoppingCart />
+          </Badge>
         </IconButton>
-
         <IconButton
           size="large"
           aria-label="user account menu"

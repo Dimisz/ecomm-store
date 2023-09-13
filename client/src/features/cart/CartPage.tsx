@@ -1,8 +1,9 @@
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 
 import CartPageMobile from "./CartPageMobile";
+
 
 const CartPage = () => {
   const { cart } = useStoreContext();
@@ -49,13 +50,22 @@ const CartPage = () => {
                     </Box>
                     {/* mobile version */}
                   </TableCell>
+                  <TableCell align="left">${(item.price).toFixed(2)}</TableCell>
                   <TableCell align="left">
-                    ${(item.price).toFixed(2)}</TableCell>
-                  <TableCell align="left">{item.quantity}</TableCell>
+                    <Box display='flex' alignItems='center'>
+                      <IconButton color='primary'>
+                        <AddCircleOutline/>
+                      </IconButton>
+                      <Typography variant='h6'>{item.quantity}</Typography>
+                      <IconButton color='primary'>
+                        <RemoveCircleOutline />
+                      </IconButton>
+                    </Box>
+                  </TableCell>
                   <TableCell align="left">${(item.price * item.quantity).toFixed(2)}</TableCell>
                   <TableCell align="left">
                     <IconButton color='error'>
-                      <Delete />
+                      <DeleteForeverOutlined />
                     </IconButton>
                   </TableCell>
                 </TableRow>

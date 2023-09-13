@@ -67,6 +67,7 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
           renderLinks={renderLinks} 
           midSectionLinks={midSectionLinks} 
           rightSectionLinks={rightSectionLinks}
+          itemsCount={itemsCount}
         />
         <Toolbar sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo section */}

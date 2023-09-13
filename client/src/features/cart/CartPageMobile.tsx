@@ -1,5 +1,5 @@
-import { Box, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Box, Card, CardContent, CardMedia, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 
 const CartPageMobile = () => {
@@ -11,6 +11,7 @@ const CartPageMobile = () => {
       <TableContainer 
         component={Paper} 
         sx={{ 
+          maxHeight: '90vh',
           width: '100%', 
           display: {xs: 'flex', md: 'none'} 
           }}
@@ -18,8 +19,7 @@ const CartPageMobile = () => {
         <Table stickyHeader aria-label="products in the cart">
           <TableHead>
             <TableRow>
-              <TableCell>Product</TableCell>
-              <TableCell align="left">Details</TableCell>
+              <TableCell align='center'>Order Details</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -31,58 +31,84 @@ const CartPageMobile = () => {
                    '&:last-child td, &:last-child th': { border: 0 },
                    }}
               >
-                <TableCell align='left' colSpan={1} width='20%'>
-                    
-                      <img
-                        src={item.pictureUrl}
-                        alt={item.name}
-                        style={{
-                          height: '6rem',
-                          width: '5rem',
-                        }}
-                      />
-            
-                </TableCell>
-                <TableCell align='left' colSpan={5} sx={{ flexGrow: 2 }}>
-                  <Box 
-                    display='flex' 
-                    flexDirection='column'
-                    flexGrow={2}
-                    alignItems='space-between'
-                  >
-                    <Box 
-                      display='flex'
-                      justifyContent='space-between'
+                <TableCell align='left'>
+                <Card sx={{ display: 'flex' }}>
+                  <CardMedia
+                      component="img"
+                      sx={{ width: {xs : 90, sm: 100} }}
+                      image={item.pictureUrl}
+                      alt={item.name}
+                    />
+                  <Box sx={{ 
+                    padding: 1,
+                    paddingTop: 0,
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    flexGrow: 1,
+                    alignItems: 'space-between',
+                    alignContent: 'space-between'
+                  }}>
+                    <CardContent sx={{ 
+                        p: 1,
+                        pt: 0,
+                        display: 'flex', 
+                        flexDirection: 'column',
+                      }}
                     >
-                      <Typography variant='h6'>{item.name}</Typography>
-                      <IconButton color='error' sx={{ mt: -1 }}>
-                        <Delete />
-                      </IconButton>
-                    </Box>
-                    <Box
-                      display='flex'
-                      justifyContent='space-between'
-                    >
-                      <Typography variant='body1' color='secondary'>
-                        ${(item.price).toFixed(2)}
-                      </Typography>
-                    </Box>
+                      <Box 
+                        display='flex'
+                        justifyContent='space-between'
+                      >
+                        <Typography component="h2" sx={{ fontSize: { xs: '1.2rem', sm: '2rem' }, fontWeight: 500, paddingTop: 0 }}>
+                          {item.name}
+                        </Typography>
+                        <IconButton color='error' sx={{ mt: -1 }}>
+                          <DeleteForeverOutlined />
+                        </IconButton>
+                      </Box>
+                      <Box mb={2}>
+                        <Typography
+                           color="text.secondary" 
+                           component="h3"
+                           sx={{ fontSize: { xs: '1rem', sm: '2rem' }}}
+                        >
+                          ${(item.price).toFixed(2)}
+                        </Typography>
+                      </Box>
+                    </CardContent>
                     <Divider />
-                    <Box
-                      mt={2}
-                      display='flex'
-                      justifyContent='space-between'
-                    >
-                      <Typography variant='body2'>+ {(item.quantity)} -</Typography>
-                      <Typography variant='body2'><i>Subtotal:</i> ${(item.price * item.quantity).toFixed(2)}</Typography>
-                    </Box>
+                    <Box 
+                        display='flex'
+                        justifyContent='space-between'
+                        alignItems='flex-end'
+                      >
+                        <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                          <IconButton color='primary'>
+                            <AddCircleOutline/>
+                          </IconButton>
+                          <Typography variant='h6'>{item.quantity}</Typography>
+                          <IconButton color='primary'>
+                            <RemoveCircleOutline />
+                          </IconButton>
+                        </Box>
+                        <Box 
+                          display='flex' 
+                          flexDirection={{ xs: 'column', sm: 'row' }} 
+                          alignItems='center'
+                        >
+                            <Typography
+                              variant='caption'
+                              color='secondary'
+                              sx={{ fontStyle: 'italic' }}
+                            >Subtotal:</Typography>
+                            <Typography variant='body1' ml={{ sm: 2 }}>
+                              ${(item.price * item.quantity).toFixed(2)}
+                            </Typography>
+                        </Box>
+                      </Box>
                   </Box>
+                  </Card>
                 </TableCell>
-                {/* <TableCell align="right">
-                  <IconButton color='error'>
-                    <Delete />
-                  </IconButton>
-                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>
