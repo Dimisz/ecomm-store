@@ -1,7 +1,8 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 
+import CartSummary from "./CartSummary";
 import CartPageMobile from "./CartPageMobile";
 import { useState } from "react";
 import agent from "../../app/api/agent";
@@ -54,11 +55,8 @@ const CartPage = () => {
             </TableHead>
             <TableBody>
               {cart.items.map((item) => (
-                <TableRow
-                  key={item.productId}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
+                <TableRow key={item.productId} hover>
+                  <TableCell scope="row">
                     <Box
                       display={{ sx: 'none', md: 'flex'}}
                       alignItems='center'
@@ -109,6 +107,9 @@ const CartPage = () => {
                 </TableRow>
               ))}
             </TableBody>
+            <TableFooter>
+              <CartSummary/>
+            </TableFooter>
           </Table>
         </TableContainer>
       </Paper>
