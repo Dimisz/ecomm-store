@@ -5,12 +5,14 @@ import { LoadingButton } from "@mui/lab";
 import CartSummary from "./CartSummary";
 
 interface Props {
+  subtotal: number;
+  deliveryFee: number;
   status: {loading: boolean; name: string};
   handleAddItem: (productId: number, name: string) => void;
   handleRemoveItem: (productId: number, name: string, quantity: number) => void;
 }
 
-const CartPageMobile = ({ status, handleAddItem, handleRemoveItem }: Props) => {
+const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRemoveItem }: Props) => {
   const { cart } = useStoreContext();
   
   if(!cart) return <Typography variant='h3'>Your cart is empty</Typography>;
@@ -150,7 +152,7 @@ const CartPageMobile = ({ status, handleAddItem, handleRemoveItem }: Props) => {
               ))}
             </TableBody>
             <TableFooter>
-              <CartSummary/>
+              <CartSummary subtotal={subtotal} deliveryFee={deliveryFee}/>
             </TableFooter>
           </Table>
         </TableContainer>

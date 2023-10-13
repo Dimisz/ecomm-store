@@ -32,11 +32,17 @@ const CartPage = () => {
       .finally(() => setStatus({ loading: false, name: '' }));
   }
 
-  if(!cart) return <Typography variant='h3'>Your cart is empty</Typography>;
+  
 
+  if(!cart || cart.items.length <= 0) return <Typography variant='h3'>Your cart is empty</Typography>;
+
+  const subtotal = cart?.items.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0;
+  const deliveryFee = subtotal > 0 && subtotal < 100 ? 5 : 0;
   return(
     <>
       <CartPageMobile 
+        subtotal={subtotal}
+        deliveryFee={deliveryFee}
         status={status}
         handleAddItem={handleAddItem} 
         handleRemoveItem={handleRemoveItem} 
@@ -108,13 +114,14 @@ const CartPage = () => {
               ))}
             </TableBody>
             <TableFooter>
-              <CartSummary/>
+              <CartSummary subtotal={subtotal} deliveryFee={deliveryFee}/>
             </TableFooter>
           </Table>
         </TableContainer>
       </Paper>
     </>
   );
+                      
 }
 
 export default CartPage;

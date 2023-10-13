@@ -1,10 +1,12 @@
 import { Typography } from "@mui/material";
 import TableFooterRow from "./TableFooterRow";
 
-const CartSummary = () => {
-    const subtotal = 0;
-    const deliveryFee = 0;
+interface Props {
+  subtotal: number;
+  deliveryFee: number;
+}
 
+const CartSummary = ({subtotal, deliveryFee} : Props) => {
     return (
         <>
             <TableFooterRow>
