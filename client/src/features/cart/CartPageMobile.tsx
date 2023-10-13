@@ -1,9 +1,10 @@
 import { Box, Button, Card, CardContent, CardMedia, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
-import { useStoreContext } from "../../app/context/StoreContext";
+
 import { LoadingButton } from "@mui/lab";
 import CartSummary from "./CartSummary";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../app/store/configureStore";
 
 interface Props {
   subtotal: number;
@@ -14,8 +15,7 @@ interface Props {
 }
 
 const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRemoveItem }: Props) => {
-  const { cart } = useStoreContext();
-  
+  const { cart } = useAppSelector((state) => state.cart);  
   if(!cart) return <Typography variant='h3'>Your cart is empty</Typography>;
 
   return(

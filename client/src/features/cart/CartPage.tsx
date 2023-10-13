@@ -1,6 +1,5 @@
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
-import { useStoreContext } from "../../app/context/StoreContext";
 
 import CartSummary from "./CartSummary";
 import CartPageMobile from "./CartPageMobile";
@@ -8,10 +7,14 @@ import { useState } from "react";
 import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { removeItem, setCart } from "./cartSlice";
 
 
 const CartPage = () => {
-  const { cart, setCart, removeItem } = useStoreContext();
+  const { cart } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
   const [status, setStatus] = useState({
     loading: false,
     name: ''
@@ -20,7 +23,7 @@ const CartPage = () => {
   const handleAddItem = (productId: number, name: string) => {
     setStatus({ loading: true, name });
     agent.Cart.addItem(productId)
-      .then((cart) => setCart(cart))
+      .then((cart) => dispatch(setCart(cart)))
       .catch((error) => console.log(error))
       .finally(() => setStatus({ loading: false, name: '' }));
   }
@@ -28,7 +31,7 @@ const CartPage = () => {
   const handleRemoveItem = (productId: number, name: string, quantity = 1) => {
     setStatus({ loading: true, name });
     agent.Cart.removeItem(productId, quantity)
-      .then(() => removeItem(productId, quantity))
+      .then(() => dispatch(removeItem({productId, quantity})))
       .catch((error) => console.log(error))
       .finally(() => setStatus({ loading: false, name: '' }));
   }

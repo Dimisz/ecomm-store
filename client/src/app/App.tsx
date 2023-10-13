@@ -11,23 +11,26 @@ import { useStoreContext } from './context/StoreContext';
 import Loader from './layout/Loader';
 import { getCookie } from './util/util';
 import agent from './api/agent';
+import { useAppDispatch } from './store/configureStore';
+import { setCart } from '../features/cart/cartSlice';
 
 const App = () => {
-  const { setCart } = useStoreContext();
+  // const { setCart } = useStoreContext();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const buyerId = getCookie('buyerId');
     if(buyerId){
       agent.Cart.get()
-        .then((cart) => setCart(cart))
+        .then((cart) => dispatch(setCart(cart)))
         .catch((error) => console.log(error))
         .finally(() => setLoading(false));
     }
     else {
       setLoading(false);
     }
-  }, [setCart]);
+  }, [dispatch]);
 
   const [darkMode, setDarkMode] = useState(true);
   const toggleTheme = () => {

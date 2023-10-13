@@ -3,7 +3,7 @@ import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } f
 import { Link, NavLink } from "react-router-dom";
 
 import MobileHeader from "./MobileHeader";
-import { useStoreContext } from "../context/StoreContext";
+import { useAppSelector } from "../store/configureStore";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Header = ({ darkMode, toggleTheme }: Props) => {
-  const { cart } = useStoreContext();
+  const { cart } = useAppSelector((state) => state.cart);
   const itemsCount = cart?.items.reduce((totalQty, item) => {
     return totalQty + item.quantity; 
   }, 0);
