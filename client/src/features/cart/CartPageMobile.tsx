@@ -1,8 +1,9 @@
-import { Box, Card, CardContent, CardMedia, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 import { LoadingButton } from "@mui/lab";
 import CartSummary from "./CartSummary";
+import { Link } from "react-router-dom";
 
 interface Props {
   subtotal: number;
@@ -24,7 +25,8 @@ const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRe
           sx={{
             maxHeight: '90vh',
             width: '100%',
-            display: {xs: 'flex', md: 'none'}
+            display: {xs: 'flex', md: 'none', },
+            flexDirection: 'column'
             }}
         >
           <Table stickyHeader aria-label="products in the cart">
@@ -155,6 +157,15 @@ const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRe
               <CartSummary subtotal={subtotal} deliveryFee={deliveryFee}/>
             </TableFooter>
           </Table>
+          <Button
+            component={Link}
+            to='/checkout'
+            variant='contained'
+            size='large'
+            fullWidth
+          >
+            Checkout
+          </Button>
         </TableContainer>
       </>
     

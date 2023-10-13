@@ -1,4 +1,4 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 
@@ -7,6 +7,7 @@ import CartPageMobile from "./CartPageMobile";
 import { useState } from "react";
 import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
+import { Link } from "react-router-dom";
 
 
 const CartPage = () => {
@@ -117,6 +118,15 @@ const CartPage = () => {
               <CartSummary subtotal={subtotal} deliveryFee={deliveryFee}/>
             </TableFooter>
           </Table>
+          <Button
+            component={Link}
+            to='/checkout'
+            variant='contained'
+            size='large'
+            fullWidth
+          >
+            Checkout
+          </Button>
         </TableContainer>
       </Paper>
     </>
