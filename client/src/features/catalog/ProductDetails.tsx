@@ -8,17 +8,16 @@ import NotFound from "../../app/errors/NotFound";
 import Loader from "../../app/layout/Loader";
 import { LoadingButton } from "@mui/lab";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { removeItem, setCart } from "../cart/cartSlice";
+import { addCartItemAsync, removeCartItemAsync } from "../cart/cartSlice";
 
 const ProductDetails = () => {
-  const { cart } = useAppSelector((state) => state.cart);
+  const { cart, status } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams<{id: string}>();
   const [qty, setQty] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
 
   const item = cart?.items.find(i => i.productId === product?.id);
 
@@ -40,21 +39,15 @@ const ProductDetails = () => {
 
   const handleUpdateCart = () => {
     if(!product) return;
-    setSubmitting(true);
+    
     
     if(!item || qty > item.quantity){
       const updatedQty = item ? qty - item.quantity : qty;
-      agent.Cart.addItem(product.id, updatedQty)
-        .then(cart => dispatch(setCart(cart)))
-        .catch(error => console.log(error))
-        .finally(() => setSubmitting(false));
+      dispatch(addCartItemAsync({productId: product.id, quantity: updatedQty}))
     }
     else {
       const updatedQty = item.quantity - qty;
-      agent.Cart.removeItem(product.id, updatedQty)
-        .then(() => dispatch(removeItem({ productId: product.id, quantity: updatedQty })))
-        .catch((error) => console.log(error))
-        .finally(() => setSubmitting(false));
+      dispatch(removeCartItemAsync({productId: product.id, quantity: updatedQty}))
     }
 
   }
@@ -142,7 +135,7 @@ const ProductDetails = () => {
             <LoadingButton
               disabled={item?.quantity === qty || (!item && qty === 0)}
               onClick={handleUpdateCart}
-              loading={submitting}
+              loading={status.includes('pendingRemoveItem' + item?.productId)}
               sx={{height: '55px'}}
               color='primary'
               size='large'

@@ -2,27 +2,18 @@ import { Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typ
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import agent from "../../app/api/agent";
 
-import { useAppDispatch } from "../../app/store/configureStore";
-import { setCart } from "../cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { addCartItemAsync } from "../cart/cartSlice";
 
 interface Props {
   product: Product;
 }
 
 const ProductCard = ({product}: Props) => {
-  const [loading, setLoading] = useState(false);
+  const { status } = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
-  const handleAddItem = (productId: number) => {
-    setLoading(true);
-    agent.Cart.addItem(productId)
-      .then((cart) => dispatch(setCart(cart)))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
   return(
     <Card 
       sx={{
@@ -59,8 +50,8 @@ const ProductCard = ({product}: Props) => {
           <CardActions sx={{ flexGrow: 1 }}>
             <LoadingButton
                 size="large"
-                onClick={() => handleAddItem(product.id)}
-                loading={loading}
+                onClick={() => dispatch(addCartItemAsync({productId: product.id}))}
+                loading={status.includes('pendingAddItem' + product.id)}
                 loadingIndicator="Adding…"
             >
               Add to cart

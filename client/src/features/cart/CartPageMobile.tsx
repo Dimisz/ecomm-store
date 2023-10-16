@@ -4,18 +4,18 @@ import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@m
 import { LoadingButton } from "@mui/lab";
 import CartSummary from "./CartSummary";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../app/store/configureStore";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { addCartItemAsync, removeCartItemAsync } from "./cartSlice";
 
 interface Props {
   subtotal: number;
   deliveryFee: number;
-  status: {loading: boolean; name: string};
-  handleAddItem: (productId: number, name: string) => void;
-  handleRemoveItem: (productId: number, name: string, quantity: number) => void;
 }
 
-const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRemoveItem }: Props) => {
-  const { cart } = useAppSelector((state) => state.cart);  
+const CartPageMobile = ({ subtotal, deliveryFee }: Props) => {
+  const { cart, status } = useAppSelector((state) => state.cart); 
+  const dispatch = useAppDispatch();
+   
   if(!cart) return <Typography variant='h3'>Your cart is empty</Typography>;
 
   return(
@@ -100,8 +100,12 @@ const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRe
                           </Box>
                           <Box>
                             <LoadingButton
-                              loading={status.loading && status.name === 'delete' + item.productId}
-                              onClick={() => handleRemoveItem(item.productId, 'delete' + item.productId, item.quantity)}
+                              loading={status === `pendingRemoveItem${item.productId}del`} 
+                              onClick={() => dispatch(removeCartItemAsync({
+                                productId: item.productId, 
+                                quantity: item.quantity,
+                                name: "del"
+                              }))}
                             >
                               <DeleteForeverOutlined/>
                             </LoadingButton>
@@ -131,15 +135,19 @@ const CartPageMobile = ({ subtotal, deliveryFee, status, handleAddItem, handleRe
                           </Box>
                           <Box sx={{ display: 'flex', alignItems: 'center'}}>
                           <LoadingButton
-                              loading={status.loading && status.name === 'decrease' + item.productId}
-                              onClick={() => handleRemoveItem(item.productId, 'decrease' + item.productId, 1)}
+                              loading={status === `pendingRemoveItem${item.productId}rem`}
+                              onClick={() => dispatch(removeCartItemAsync({
+                                productId: item.productId,
+                                quantity: 1,
+                                name: 'rem'
+                              }))}
                               color='primary'>
                               <RemoveCircleOutline />
                             </LoadingButton>
                             <Typography variant='h6'>{item.quantity}</Typography>
                             <LoadingButton
-                              loading={status.loading && status.name === 'increase' + item.productId}
-                              onClick={() => handleAddItem(item.productId, 'increase' + item.productId)}
+                              loading={status === 'pendingAddItem' + item.productId}
+                              onClick={() => dispatch(addCartItemAsync({productId: item.productId}))}
                               color='primary'
                             >
                               <AddCircleOutline/>

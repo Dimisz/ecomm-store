@@ -3,39 +3,15 @@ import { AddCircleOutline, DeleteForeverOutlined, RemoveCircleOutline } from "@m
 
 import CartSummary from "./CartSummary";
 import CartPageMobile from "./CartPageMobile";
-import { useState } from "react";
-import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { removeItem, setCart } from "./cartSlice";
+import { addCartItemAsync, removeCartItemAsync } from "./cartSlice";
 
 
 const CartPage = () => {
-  const { cart } = useAppSelector((state) => state.cart);
+  const { cart, status } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
-
-  const [status, setStatus] = useState({
-    loading: false,
-    name: ''
-  });
-  
-  const handleAddItem = (productId: number, name: string) => {
-    setStatus({ loading: true, name });
-    agent.Cart.addItem(productId)
-      .then((cart) => dispatch(setCart(cart)))
-      .catch((error) => console.log(error))
-      .finally(() => setStatus({ loading: false, name: '' }));
-  }
-
-  const handleRemoveItem = (productId: number, name: string, quantity = 1) => {
-    setStatus({ loading: true, name });
-    agent.Cart.removeItem(productId, quantity)
-      .then(() => dispatch(removeItem({productId, quantity})))
-      .catch((error) => console.log(error))
-      .finally(() => setStatus({ loading: false, name: '' }));
-  }
-
   
 
   if(!cart || cart.items.length <= 0) return <Typography variant='h3'>Your cart is empty</Typography>;
@@ -47,9 +23,6 @@ const CartPage = () => {
       <CartPageMobile 
         subtotal={subtotal}
         deliveryFee={deliveryFee}
-        status={status}
-        handleAddItem={handleAddItem} 
-        handleRemoveItem={handleRemoveItem} 
       />
       <Paper sx={{ width: '100%', overflow: 'hidden', display: {xs: 'none', md: 'flex'} }}>
         <TableContainer sx={{ maxHeight: '90vh' }}>
@@ -89,16 +62,20 @@ const CartPage = () => {
                     <Box display='flex' alignItems='center'>
                       <LoadingButton 
                         color='primary' 
-                        loading={status.loading && status.name === 'decrease' + item.productId}
-                        onClick={() => handleRemoveItem(item.productId, 'decrease' + item.productId)}
+                        loading={status === `pendingRemoveItem${item.productId}rem`}
+                        onClick={() => dispatch(removeCartItemAsync({
+                          productId: item.productId,
+                          quantity: 1,
+                          name: 'rem'
+                        }))}
                       >
                         <RemoveCircleOutline />
                       </LoadingButton>
                       <Typography variant='h6'>{item.quantity}</Typography>
                       <LoadingButton 
                         color='primary' 
-                        loading={status.loading && status.name === 'increase' + item.productId}
-                        onClick={() => handleAddItem(item.productId, 'increase' + item.productId)}
+                        loading={status === 'pendingAddItem' + item.productId}
+                        onClick={() => dispatch(addCartItemAsync({productId: item.productId}))}
                       >
                         <AddCircleOutline/>
                       </LoadingButton>
@@ -108,8 +85,12 @@ const CartPage = () => {
                   <TableCell align="left">
                     <LoadingButton 
                       color='error'
-                      loading={status.loading && status.name === 'delete' + item.productId} 
-                      onClick={() => handleRemoveItem(item.productId, 'delete' + item.productId, item.quantity)}
+                      loading={status === `pendingRemoveItem${item.productId}del`} 
+                      onClick={() => dispatch(removeCartItemAsync({
+                        productId: item.productId, 
+                        quantity: item.quantity,
+                        name: "del"
+                      }))}
                     >
                       <DeleteForeverOutlined />
                     </LoadingButton>
