@@ -131,7 +131,7 @@ const ProductDetails = () => {
             <LoadingButton
               disabled={item?.quantity === qty || (!item && qty === 0)}
               onClick={handleUpdateCart}
-              loading={status.includes('pendingRemoveItem' + item?.productId)}
+              loading={status.includes('pending')}
               sx={{height: '55px'}}
               color='primary'
               size='large'

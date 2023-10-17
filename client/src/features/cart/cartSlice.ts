@@ -14,24 +14,24 @@ const initialState: CartState = {
 
 export const addCartItemAsync = createAsyncThunk<Cart, {productId: number, quantity?: number}>(
   'cart/addCartItemAsync',
-  async ({productId, quantity = 1}) => {
+  async ({productId, quantity = 1}, thunkApi) => {
     try {
       return await agent.Cart.addItem(productId, quantity);
     }
-    catch(error){
-      console.log(error);
+    catch(error: any){
+      return thunkApi.rejectWithValue({error: error.data});
     }
   }
 );
 
 export const removeCartItemAsync = createAsyncThunk<void, {productId: number, quantity: number, name?: string}>(
   'cart/removeCartItemAsync',
-  async({productId, quantity}) => {
+  async({productId, quantity}, thunkApi) => {
     try {
       await agent.Cart.removeItem(productId, quantity);
     }
-    catch(error){
-      console.log(error);
+    catch(error: any){
+      return thunkApi.rejectWithValue({error: error.data});
     }
   }
 );
@@ -52,8 +52,9 @@ export const cartSlice = createSlice({
       state.cart = action.payload;
       state.status = 'idle';
     });
-    builder.addCase(addCartItemAsync.rejected, (state) => {
+    builder.addCase(addCartItemAsync.rejected, (state, action) => {
       state.status = 'idle';
+      console.log(action.payload);
     });
     builder.addCase(removeCartItemAsync.pending, (state, action) => {
       state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
@@ -68,8 +69,9 @@ export const cartSlice = createSlice({
       }
       state.status = 'idle';
     });
-    builder.addCase(removeCartItemAsync.rejected, (state) => {
+    builder.addCase(removeCartItemAsync.rejected, (state, action) => {
       state.status = 'idle';
+      console.log(action.payload);
     });
     
 
