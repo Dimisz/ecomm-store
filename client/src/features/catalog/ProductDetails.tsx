@@ -2,33 +2,29 @@ import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, T
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../../app/models/product";
-import agent from "../../app/api/agent";
 import NotFound from "../../app/errors/NotFound";
 import Loader from "../../app/layout/Loader";
 import { LoadingButton } from "@mui/lab";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addCartItemAsync, removeCartItemAsync } from "../cart/cartSlice";
+import { fetchProductAsync, productSelectors } from "./catalogSlice";
 
 const ProductDetails = () => {
   const { cart, status } = useAppSelector((state) => state.cart);
+  const { status: productStatus } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
-  
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+
   const { id } = useParams<{id: string}>();
+  const product = useAppSelector((state) => productSelectors.selectById(state, id!));
+  
   const [qty, setQty] = useState(0);
 
   const item = cart?.items.find(i => i.productId === product?.id);
 
   useEffect(()=> {
     if(item) setQty(item.quantity);
-
-    id && agent.Catalog.details(parseInt(id))
-      .then(res => setProduct(res))
-      .catch(error => console.log(error))
-      .finally(() => setLoading(false));
-  }, [id, item]);
+    if(!product && id) dispatch(fetchProductAsync(parseInt(id)));
+  }, [id, item, dispatch, product]);
 
   const handleInputChange = (event: any) => {
     const inputNum = parseInt(event.currentTarget.value);
@@ -52,7 +48,7 @@ const ProductDetails = () => {
 
   }
 
-  if(loading) return <Loader message='Loading product details...' />;
+  if(productStatus.includes('pending')) return <Loader message='Loading product details...' />;
   if(!product) return <NotFound />;
   return(
     <Grid 
