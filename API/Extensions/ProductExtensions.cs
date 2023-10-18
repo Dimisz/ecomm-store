@@ -21,10 +21,20 @@ namespace API.Extensions
         {
             if (string.IsNullOrEmpty(searchTerm) || string.IsNullOrWhiteSpace(searchTerm)) return query;
 
-            string lowerCaseSearchTerm = searchTerm.Trim().ToLower();
-            query = query.Where(p => p.Name.ToLower().Contains(lowerCaseSearchTerm));
-            query = query.Where(p => p.Type.ToLower().Contains(lowerCaseSearchTerm));
-            // query = query.Where(p => p.Brand.ToLower().Contains(lowerCaseSearchTerm));
+            List<string> searchTerms = new List<string>();
+            searchTerms.AddRange(searchTerm.ToLower().Split(" ").ToList());
+
+            if (searchTerms.Count == 0) return query;
+
+            foreach (string term in searchTerms)
+            {
+                query = query.Where(p =>
+                    p.Brand.ToLower().Contains(term)
+                    || p.Name.ToLower().Contains(term)
+                    || p.Type.ToLower().Contains(term)
+                );
+            }
+
             return query;
         }
 
