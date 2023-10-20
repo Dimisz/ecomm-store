@@ -2,8 +2,8 @@ import { AppBar, ListItem, useMediaQuery, useTheme } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import MobileHeader from "./MobileHeader";
-import { useAppSelector } from "../store/configureStore";
 import FullScreenHeader from "./FullScreenHeader";
+import { useAppSelector } from "../store/configureStore";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -52,37 +52,34 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
       );
     });
   }
-  const renderedMidSectionLinks = renderLinks(midSectionLinks);
-  const renderedRightSectionLinks = renderLinks(rightSectionLinks);
 
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("md"));
 
   return(
-    <>
-      <AppBar position='sticky' >
-        {
-          greaterThanSm
-          ?
-          <FullScreenHeader
-            darkMode={darkMode} 
-            toggleTheme={toggleTheme}
-            renderedMidSectionLinks={renderedMidSectionLinks}
-            renderedRightSectionLinks={renderedRightSectionLinks}
-            itemsCount={itemsCount}
-          />
-          :
-          <MobileHeader
-            darkMode= {darkMode}
-            toggleTheme={toggleTheme}
-            renderLinks={renderLinks} 
-            midSectionLinks={midSectionLinks} 
-            rightSectionLinks={rightSectionLinks}
-            itemsCount={itemsCount}
-          />
-        }
-      </AppBar>
-    </>
+    <AppBar position='sticky' >
+      {
+        greaterThanSm
+        ?
+        <FullScreenHeader
+          darkMode={darkMode} 
+          toggleTheme={toggleTheme}
+          renderLinks={renderLinks}
+          midSectionLinks={midSectionLinks}
+          rightSectionLinks={rightSectionLinks}
+          itemsCount={itemsCount}
+        />
+        :
+        <MobileHeader
+          darkMode= {darkMode}
+          toggleTheme={toggleTheme}
+          renderLinks={renderLinks} 
+          midSectionLinks={midSectionLinks} 
+          rightSectionLinks={rightSectionLinks}
+          itemsCount={itemsCount}
+        />
+      }
+    </AppBar>
   );
 }
 

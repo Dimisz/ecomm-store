@@ -5,18 +5,22 @@ import { Link, NavLink } from "react-router-dom";
 interface Props {
   darkMode: boolean;
   toggleTheme: () => void;
-  renderedMidSectionLinks:  React.ReactNode[];
-  renderedRightSectionLinks: React.ReactNode[];
+  renderLinks: (links: { title: string; path: string; }[], handler?: () => void ) => React.ReactNode;
+  midSectionLinks: { title: string; path: string; }[];
+  rightSectionLinks: { title: string; path: string; }[];
   itemsCount: number | undefined;
 }
 
 const FullScreenHeader = ({
   darkMode, 
   toggleTheme,
-  renderedMidSectionLinks,
-  renderedRightSectionLinks,
+  renderLinks,
+  midSectionLinks,
+  rightSectionLinks,
   itemsCount
  }: Props) => {
+  const renderedMidSectionLinks = renderLinks(midSectionLinks);
+  const renderedRightSectionLinks = renderLinks(rightSectionLinks);
   return(
     <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo section */}

@@ -99,16 +99,6 @@ const MobileHeader = ({
       </Typography>
       
       <Box display={{ xs: 'flex', md: 'none' }} alignItems='center'>
-        {/* <IconButton
-          size='large'
-          onClick={toggleTheme}
-        >
-          {darkMode
-            ?
-            <LightMode titleAccess="Switch to light mode" />
-            :
-            <DarkMode titleAccess="Switch to dark mode" />}
-        </IconButton> */}
         <IconButton 
           // sx={{ marginLeft: 1, marginRight: 1 }}
           component={Link}
