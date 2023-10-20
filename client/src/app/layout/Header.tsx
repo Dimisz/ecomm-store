@@ -54,12 +54,12 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
   }
 
   const theme = useTheme();
-  const greaterThanSm = useMediaQuery(theme.breakpoints.up("md"));
+  const greaterThanMd = useMediaQuery(theme.breakpoints.up("md"));
 
   return(
     <AppBar position='sticky' >
       {
-        greaterThanSm
+        greaterThanMd
         ?
         <FullScreenHeader
           darkMode={darkMode} 
