@@ -36,11 +36,14 @@ const ProductCard = ({product}: Props) => {
           <CardHeader
             title={product.name}
             titleTypographyProps={{
-              sx: {fontWeight: { xs: 500, lg: 600 }, fontSize: '1.5rem', color: 'primary.main' }
+              sx: {
+                  fontWeight: { xs: 500, lg: 600 }, 
+                  fontSize: { xs: '1.5rem', md: '1.3rem', lg: '1.2rem'}, 
+                  color: 'primary.main' }
             }}
           />
           <CardContent sx={{ flexGrow: 1, pt: 0, pb: 0 }}>
-            <Typography gutterBottom color='secondary' variant="h4">
+            <Typography gutterBottom color='secondary' variant="h6">
               ${product.price.toFixed(2)}
             </Typography>
             <Typography variant="body1" color="text.secondary">

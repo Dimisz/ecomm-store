@@ -1,9 +1,9 @@
-import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { AppBar, ListItem, useMediaQuery, useTheme } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 import MobileHeader from "./MobileHeader";
 import { useAppSelector } from "../store/configureStore";
+import FullScreenHeader from "./FullScreenHeader";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
@@ -35,7 +35,6 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
           to={path}
           key={path}
           sx={{ 
-            // my: 2, 
             color: 'inherit', 
             typography: 'h6', 
             display: 'block', 
@@ -56,66 +55,32 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
   const renderedMidSectionLinks = renderLinks(midSectionLinks);
   const renderedRightSectionLinks = renderLinks(rightSectionLinks);
 
+  const theme = useTheme();
+  const greaterThanSm = useMediaQuery(theme.breakpoints.up("md"));
+
   return(
     <>
-      {/* full-screen navbar */}
       <AppBar position='sticky' >
-        {/* NavBar for small-screen devices extracted to a separate component */}
-        <MobileHeader
-          darkMode= {darkMode}
-          toggleTheme={toggleTheme}
-          renderLinks={renderLinks} 
-          midSectionLinks={midSectionLinks} 
-          rightSectionLinks={rightSectionLinks}
-          itemsCount={itemsCount}
-        />
-        <Toolbar sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* Logo section */}
-          <Box display='flex' alignItems='center'>
-            <Typography
-                variant='h6'
-                noWrap
-                component={NavLink}
-                to='/'
-                sx={{ color: 'inherit', textDecoration: 'none' }}
-              >
-                E-KOMM
-              </Typography>
-              <IconButton
-                size='large'
-                onClick={toggleTheme}
-              >
-                { darkMode
-                  ?
-                  <LightMode titleAccess="Switch to light mode"/>
-                  :
-                  <DarkMode titleAccess="Switch to dark mode"/>
-                }
-              </IconButton>
-          </Box>
-          {/* middle section */}
-          <List sx={{ display: 'flex' }}>
-           {renderedMidSectionLinks}
-          </List>
-          {/* right hand section */}
-
-          <Box display='flex' alignItems='center'>
-            <IconButton 
-              component={Link}
-              to='/cart'
-              size='large' 
-              edge='start' 
-              color='inherit'
-            >
-              <Badge badgeContent={itemsCount} color='secondary'>
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-            <List sx={{ display: 'flex' }}>
-             {renderedRightSectionLinks}
-            </List>
-          </Box>
-        </Toolbar>
+        {
+          greaterThanSm
+          ?
+          <FullScreenHeader
+            darkMode={darkMode} 
+            toggleTheme={toggleTheme}
+            renderedMidSectionLinks={renderedMidSectionLinks}
+            renderedRightSectionLinks={renderedRightSectionLinks}
+            itemsCount={itemsCount}
+          />
+          :
+          <MobileHeader
+            darkMode= {darkMode}
+            toggleTheme={toggleTheme}
+            renderLinks={renderLinks} 
+            midSectionLinks={midSectionLinks} 
+            rightSectionLinks={rightSectionLinks}
+            itemsCount={itemsCount}
+          />
+        }
       </AppBar>
     </>
   );
