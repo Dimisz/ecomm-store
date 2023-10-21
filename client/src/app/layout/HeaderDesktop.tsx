@@ -11,7 +11,7 @@ interface Props {
   itemsCount: number | undefined;
 }
 
-const FullScreenHeader = ({
+const HeaderDesktop = ({
   darkMode, 
   toggleTheme,
   renderLinks,
@@ -72,4 +72,4 @@ const FullScreenHeader = ({
   );
 }
 
-export default FullScreenHeader;
+export default HeaderDesktop;

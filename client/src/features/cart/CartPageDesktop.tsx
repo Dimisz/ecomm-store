@@ -6,7 +6,7 @@ import CartSummary from "./CartSummary";
 import { removeCartItemAsync, addCartItemAsync } from "./cartSlice";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 
-const CartPageFullscreen = () => {
+const CartPageDesktop = () => {
   const { cart, status } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   
@@ -109,4 +109,4 @@ const CartPageFullscreen = () => {
   );
 }
 
-export default CartPageFullscreen;
+export default CartPageDesktop;

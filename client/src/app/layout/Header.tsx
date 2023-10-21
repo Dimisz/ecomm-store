@@ -1,8 +1,8 @@
 import { AppBar, ListItem, useMediaQuery, useTheme } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import MobileHeader from "./MobileHeader";
-import FullScreenHeader from "./FullScreenHeader";
+import HeaderMobile from "./HeaderMobile";
+import HeaderDesktop from "./HeaderDesktop";
 import { useAppSelector } from "../store/configureStore";
 
 const midSectionLinks = [
@@ -61,7 +61,7 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
       {
         greaterThanMd
         ?
-        <FullScreenHeader
+        <HeaderDesktop
           darkMode={darkMode} 
           toggleTheme={toggleTheme}
           renderLinks={renderLinks}
@@ -70,7 +70,7 @@ const Header = ({ darkMode, toggleTheme }: Props) => {
           itemsCount={itemsCount}
         />
         :
-        <MobileHeader
+        <HeaderMobile
           darkMode= {darkMode}
           toggleTheme={toggleTheme}
           renderLinks={renderLinks} 

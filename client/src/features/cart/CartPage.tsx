@@ -1,5 +1,5 @@
 import { useMediaQuery, useTheme } from "@mui/material";
-import CartPageFullscreen from "./CartPageFullscreen";
+import CartPageDesktop from "./CartPageDesktop";
 import CartPageMobile from "./CartPageMobile";
 
 
@@ -8,7 +8,7 @@ const CartPage = () => {
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
   return(
     <>
-      { greaterThanSm ? <CartPageFullscreen /> : <CartPageMobile/>}
+      { greaterThanSm ? <CartPageDesktop /> : <CartPageMobile/>}
     </>
   );
                       

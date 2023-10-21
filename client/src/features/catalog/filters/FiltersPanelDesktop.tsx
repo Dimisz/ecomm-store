@@ -1,4 +1,6 @@
-import { Grid, Paper, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox } from "@mui/material";
+import { Search } from "@mui/icons-material";
+import { Grid, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
+
 
 interface Props {
   sortOptions: { value: string; label: string; }[];
@@ -6,17 +8,39 @@ interface Props {
   types: string[];
 }
 
-const FiltersPanelFullscreen = ({ sortOptions, brands, types }: Props) => {
+const FiltersPanelDesktop = ({ sortOptions, brands, types }: Props) => {
   return(
     <Grid item md={3}>
-      <Paper sx={{mb: 2, mt: 5 }}>
+      {/* <Paper sx={{mb: 2, mt: 5 }}> */}
+        <FormControl sx={{ mb: 2, mt: 5, width: '100%' }} variant="outlined">
+          <InputLabel htmlFor="search-products-field">Search Products</InputLabel>
+          <OutlinedInput
+            id="search-products-field"
+            type="text"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="search products"
+                  // onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  <Search/>
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Search Products"
+          />
+        </FormControl>
+      {/* </Paper> */}
+      {/* <Paper sx={{mb: 2, mt: 5 }}>
         <TextField
           variant='outlined'
           label='Search products'
           
           fullWidth
         />
-      </Paper>
+      </Paper> */}
       <Paper sx={{mb: 2, p: 2}}>
         <FormControl component='fieldset'>
           <FormLabel component='legend'>Sort By</FormLabel>
@@ -58,4 +82,4 @@ const FiltersPanelFullscreen = ({ sortOptions, brands, types }: Props) => {
   );
 }
 
-export default FiltersPanelFullscreen;
+export default FiltersPanelDesktop;

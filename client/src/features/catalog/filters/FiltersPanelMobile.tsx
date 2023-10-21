@@ -1,5 +1,5 @@
-import { FilterListRounded } from "@mui/icons-material";
-import { Grid, Paper, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox, SwipeableDrawer, Button, Box, IconButton } from "@mui/material";
+import { FilterListRounded, Search } from "@mui/icons-material";
+import { Grid, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox, SwipeableDrawer, Button, Box, IconButton, Typography, InputLabel, OutlinedInput, InputAdornment } from "@mui/material";
 import { useState } from "react";
 
 interface Props {
@@ -27,14 +27,30 @@ const FiltersPanelMobile = ({ sortOptions, brands, types }: Props) => {
     };
   return(
     <Grid item xs={12}>
-      <Box display='flex' alignItems='center'>
-        <Paper sx={{m: 2, flexGrow: 1}}>
-          <TextField
-            variant='outlined'
-            label='Search products'
-            fullWidth
-          />
-        </Paper>
+      <FormControl sx={{ m: 0, mt: 2, width: '100%' }} variant="outlined">
+        <InputLabel htmlFor="search-products-field">Search Products</InputLabel>
+        <OutlinedInput
+          id="search-products-field"
+          type="text"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="search products"
+                // onClick={handleClickShowPassword}
+                // onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                <Search/>
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Search Products"
+        />
+      </FormControl>
+      <Box display='flex' alignItems='center' justifyContent='right'>
+        <Typography>
+          Filter by: 
+        </Typography>
         <IconButton 
           size="large"
           aria-label="filtering controls"
@@ -46,7 +62,6 @@ const FiltersPanelMobile = ({ sortOptions, brands, types }: Props) => {
           <FilterListRounded/>
         </IconButton>
       </Box>
-      
       <SwipeableDrawer
         anchor='top'
         open={isOpen}
@@ -96,7 +111,12 @@ const FiltersPanelMobile = ({ sortOptions, brands, types }: Props) => {
                 );
               })}
             </FormGroup>
-            <Button onClick={toggleDrawer(false)} variant='outlined'>Apply Filters</Button>
+            <Button 
+              onClick={toggleDrawer(false)} 
+              variant='outlined'
+              sx={{ display: 'block', marginLeft: 'auto'}}
+              
+            >Apply Filters</Button>
         </Paper>
       </Grid>
       </SwipeableDrawer>

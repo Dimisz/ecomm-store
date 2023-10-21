@@ -14,7 +14,7 @@ interface Props {
   itemsCount: number | undefined;
 }
 
-const MobileHeader = ({ 
+const HeaderMobile = ({ 
   darkMode, 
   toggleTheme, 
   renderLinks, 
@@ -146,4 +146,4 @@ const MobileHeader = ({
   );
 }
 
-export default MobileHeader;
+export default HeaderMobile;

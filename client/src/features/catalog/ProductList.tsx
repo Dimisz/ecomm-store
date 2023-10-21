@@ -17,7 +17,7 @@ const ProductList = ({ products }: Props) => {
   });
 
   return(
-    <Grid container spacing={4} sx={{ mt: 1 }}>
+    <Grid container spacing={4} sx={{ mt: { xs: 0, md: 1} }}>
         {renderedProducts}
     </Grid>
   );

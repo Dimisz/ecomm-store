@@ -5,7 +5,7 @@ import Loader from '../../app/layout/Loader';
 import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
 import { fetchAllProductsAsync, fetchFiltersAsync, productSelectors } from './catalogSlice';
 import { Box, Grid, Pagination, Typography, useMediaQuery, useTheme } from "@mui/material";
-import FiltersPanelFullscreen from "./filters/FiltersPanelFullscreen";
+import FiltersPanelDesktop from "./filters/FiltersPanelDesktop";
 import FiltersPanelMobile from "./filters/FiltersPanelMobile";
 
 const sortOptions = [
@@ -37,7 +37,7 @@ const Catalog = () => {
       <Grid container spacing={3}>
         { greaterThanMd
           ? 
-          <FiltersPanelFullscreen 
+          <FiltersPanelDesktop 
             sortOptions={sortOptions}
             brands={brands}
             types={types}
@@ -49,13 +49,18 @@ const Catalog = () => {
             types={types}
           /> 
         }
-        <Grid item xs={12} md={9}>
-          <ProductList products={products}/>
+        <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
+          <ProductList products={products} />
         </Grid>
         { greaterThanMd && <Grid item md={3}/>}
         <Grid item xs={12} md={9}>
-          <Box display='flex' justifyContent='space-between' alignItems='center' mb={2} flexDirection={{xs: 'column', md: 'row'}}>
-            <Typography>
+          <Box 
+            display='flex' 
+            justifyContent='space-between' 
+            alignItems='center' 
+            mb={2} 
+            flexDirection={{xs: 'column', md: 'row'}}>
+            <Typography sx={{marginTop: {xs: -1}}}>
               Displaying 1-6 of 20 items
             </Typography>
             <Pagination
@@ -63,6 +68,7 @@ const Catalog = () => {
               size='large'
               count={5}
               page={2}
+              sx={{marginTop: {xs: 1, md: 0}}}
             />
           </Box>
         </Grid>

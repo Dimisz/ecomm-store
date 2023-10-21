@@ -7,7 +7,7 @@ import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/materia
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useStoreContext } from './context/StoreContext';
+// import { useStoreContext } from './context/StoreContext';
 import Loader from './layout/Loader';
 import { getCookie } from './util/util';
 import agent from './api/agent';
