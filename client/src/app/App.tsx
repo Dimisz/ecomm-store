@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import my components
-import Header from "./layout/Header";
+import Header from "./layout/header/Header";
 // import ResponsiveAppBar from './layout/ResponsiveHeader';
 // mui imports
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";

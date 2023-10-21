@@ -17,7 +17,7 @@ const sortOptions = [
 
 const Catalog = () => {
   const products = useAppSelector(productSelectors.selectAll);
-  const { productsLoaded, status, filtersLoaded, brands, types } = useAppSelector(state => state.catalog);
+  const { productsLoaded, status, filtersLoaded, brands, types, productParams } = useAppSelector(state => state.catalog);
 
   const dispatch = useAppDispatch();
 
@@ -41,12 +41,18 @@ const Catalog = () => {
             sortOptions={sortOptions}
             brands={brands}
             types={types}
+            orderBy={productParams.orderBy}
+            checkedBrands={productParams.brands}
+            checkedTypes={productParams.types}
           /> 
           :
           <FiltersPanelMobile
             sortOptions={sortOptions}
             brands={brands}
             types={types}
+            orderBy={productParams.orderBy}
+            checkedBrands={productParams.brands}
+            checkedTypes={productParams.types}
           /> 
         }
         <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>

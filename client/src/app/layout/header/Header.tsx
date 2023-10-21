@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
-import { useAppSelector } from "../store/configureStore";
+import { useAppSelector } from "../../store/configureStore";
 
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },

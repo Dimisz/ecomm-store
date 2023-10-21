@@ -1,82 +1,45 @@
-import { Search } from "@mui/icons-material";
-import { Grid, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormGroup, Checkbox, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
+import ProductSearch from "../search-field/ProductSearch";
+import RadioButtonGroup from "../../../app/layout/radio-button-group/RadioButtonGroup";
+import { useAppDispatch } from "../../../app/store/configureStore";
+import { setProductParams } from "../catalogSlice";
+import CheckboxButtonsGroup from "../../../app/layout/checkbox-buttons-group/CheckboxButtonsGroup";
 
 
 interface Props {
   sortOptions: { value: string; label: string; }[];
   brands: string[];
   types: string[];
+  orderBy: string;
+  checkedBrands: string[] | undefined;
+  checkedTypes: string[] | undefined;
 }
 
-const FiltersPanelDesktop = ({ sortOptions, brands, types }: Props) => {
+const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrands, checkedTypes }: Props) => {
+  const dispatch = useAppDispatch();
   return(
     <Grid item md={3}>
-      {/* <Paper sx={{mb: 2, mt: 5 }}> */}
-        <FormControl sx={{ mb: 2, mt: 5, width: '100%' }} variant="outlined">
-          <InputLabel htmlFor="search-products-field">Search Products</InputLabel>
-          <OutlinedInput
-            id="search-products-field"
-            type="text"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="search products"
-                  // onClick={handleClickShowPassword}
-                  // onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  <Search/>
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Search Products"
-          />
-        </FormControl>
-      {/* </Paper> */}
-      {/* <Paper sx={{mb: 2, mt: 5 }}>
-        <TextField
-          variant='outlined'
-          label='Search products'
-          
-          fullWidth
+      <ProductSearch/>
+      <Paper sx={{mb: 2, p: 2}}>
+        <RadioButtonGroup
+          selectedValue={orderBy}
+          options={sortOptions}
+          onChange={(event) => dispatch(setProductParams({orderBy: event.target.value}))}
         />
-      </Paper> */}
-      <Paper sx={{mb: 2, p: 2}}>
-        <FormControl component='fieldset'>
-          <FormLabel component='legend'>Sort By</FormLabel>
-          <RadioGroup
-            aria-label='sorting options'
-            defaultValue='name'
-            name='radio-buttons-group'
-          >
-            {sortOptions.map((option) => {
-              return(
-                <FormControlLabel 
-                  key={option.value}
-                  value={option.value} 
-                  control={<Radio/>} label={option.label} />
-              )
-            })}
-          </RadioGroup>
-        </FormControl>
       </Paper>
       <Paper sx={{mb: 2, p: 2}}>
-        <FormGroup>
-          {brands.map((brand) => {
-            return(
-              <FormControlLabel control={<Checkbox />} label={brand} key={brand} />
-            );
-          })}
-        </FormGroup>
+        <CheckboxButtonsGroup
+          items={brands}
+          checked={checkedBrands}
+          onChange={(items: string[]) => dispatch(setProductParams({brands: items}))}
+        />
       </Paper>
       <Paper sx={{mb: 2, p: 2}}>
-          <FormGroup>
-            {types.map((type) => {
-              return(
-                <FormControlLabel control={<Checkbox />} label={type} key={type} />
-              );
-            })}
-          </FormGroup>
+        <CheckboxButtonsGroup
+            items={types}
+            checked={checkedTypes}
+            onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
+          />
         </Paper>
     </Grid>
   );
