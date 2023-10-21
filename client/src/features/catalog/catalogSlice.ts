@@ -1,15 +1,44 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { Product } from "../../app/models/product";
+import { Product, ProductParams } from "../../app/models/product";
 import agent from "../../app/api/agent";
 import { RootState } from "../../app/store/configureStore";
 
+interface CatalogState {
+  productsLoaded: boolean;
+  filtersLoaded: boolean;
+  status: string;
+  brands: string[];
+  types: string[];
+  productParams: ProductParams;
+}
+
 const productsAdapter = createEntityAdapter<Product>();
 
-export const fetchAllProductsAsync = createAsyncThunk<Product[]>(
+const getAxiosParams = (productParams: ProductParams) => {
+  const params = new URLSearchParams();
+  params.append('pageNumber', productParams.pageNumber.toString());
+  params.append('pageSize', productParams.pageSize.toString());
+  params.append('orderBy', productParams.orderBy);
+
+  // checking if optional parameters were passed
+  if(productParams.searchTerm){
+    params.append('searchTerm', productParams.searchTerm);
+  }
+  if(productParams.brands){
+    params.append('brands', productParams.brands.toString());
+  }
+  if(productParams.types){
+    params.append('types', productParams.types.toString());
+  }
+  return params;
+}
+
+export const fetchAllProductsAsync = createAsyncThunk<Product[], void, {state: RootState}>(
   'catalog/fetchAllProductsAsync',
   async (_, thunkApi) => {
+    const params = getAxiosParams(thunkApi.getState().catalog.productParams);
     try {
-      return await agent.Catalog.list();
+      return await agent.Catalog.list(params);
     }
     catch(error: any){
       return thunkApi.rejectWithValue({ error: error.data });
@@ -41,16 +70,33 @@ export const fetchFiltersAsync = createAsyncThunk(
   }
 )
 
+const initParams = () => {
+  return {
+    pageNumber: 1,
+    pageSize: 6,
+    orderBy: 'name'
+  }
+}
+
 export const catalogSlice = createSlice({
   name: 'catalog',
-  initialState: productsAdapter.getInitialState({
+  initialState: productsAdapter.getInitialState<CatalogState>({
     productsLoaded: false,
     filtersLoaded: false,
     status: 'idle',
     brands: [],
-    types: []
+    types: [],
+    productParams: initParams()
   }),
-  reducers: {},
+  reducers: {
+    setProductParams: (state, action) => {
+      state.productsLoaded = false;
+      state.productParams = {...state.productParams, ...action.payload};
+    },
+    resetProductParams: (state) => {
+      state.productParams = initParams();
+    }
+  },
   extraReducers: (builder => {
     builder.addCase(fetchAllProductsAsync.pending, (state) => {
       state.status = 'pendingFetchAllProducts';
@@ -92,3 +138,5 @@ export const catalogSlice = createSlice({
 })
 
 export const productSelectors = productsAdapter.getSelectors((state: RootState) => state.catalog);
+
+export const { setProductParams, resetProductParams } = catalogSlice.actions;
