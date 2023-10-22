@@ -3,29 +3,36 @@ import { MetaData } from "../../models/pagination";
 
 interface Props {
   greaterThanMd: boolean;
-  metaData: MetaData | null;
+  metaData: MetaData;
+  onPageChange: (page: number) => void;
 }
 
-const AppPagination = ({greaterThanMd, metaData}: Props) => {
+const AppPagination = ({greaterThanMd, metaData, onPageChange}: Props) => {
+  const {currentPage, totalCount, totalPages, pageSize} = metaData;
   return(
     <>
       { greaterThanMd && <Grid item md={3}/>}
         <Grid item xs={12} md={9}>
           <Box 
+            mt={2}
+            mb={2}
             display='flex' 
             justifyContent='space-between' 
             alignItems='center' 
-            mb={2} 
             flexDirection={{xs: 'column', md: 'row'}}>
-              <Typography sx={{marginTop: {xs: -1}}}>
-                { metaData && metaData?.totalCount > 0 ? `Displaying 1-6 of ${metaData?.totalCount} items` : 'No products found'}
+              <Typography>
+                Displaying {(currentPage - 1) * pageSize + 1}-
+                {currentPage*pageSize > totalCount 
+                ? totalCount 
+                : currentPage * pageSize} of {totalCount} items
               </Typography>
             <Pagination
               color='secondary'
               size='large'
-              count={metaData?.totalPages || 0}
-              page={metaData?.currentPage || 0}
-              sx={{marginTop: {xs: 1, md: 0}}}
+              count={totalPages || 0}
+              page={currentPage || 0}
+              sx={{marginTop: { xs: 1 }, marginBottom: { xs: 1}}}
+              onChange={(_, page) => onPageChange(page)}
             />
           </Box>
         </Grid>

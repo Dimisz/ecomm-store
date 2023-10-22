@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import ProductList from "./ProductList";
 import Loader from '../../app/layout/Loader';
 import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
-import { fetchAllProductsAsync, fetchFiltersAsync, productSelectors } from './catalogSlice';
+import { fetchAllProductsAsync, fetchFiltersAsync, productSelectors, setPageNumber } from './catalogSlice';
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FiltersPanelDesktop from "./filters/FiltersPanelDesktop";
 import FiltersPanelMobile from "./filters/FiltersPanelMobile";
@@ -35,7 +35,7 @@ const Catalog = () => {
 
   if(status.includes('pending')) return <Loader message='Loading products...' />;
   return(
-      <Grid container spacing={3}>
+      <Grid container columnSpacing={3}>
         { greaterThanMd
           ? 
           <FiltersPanelDesktop 
@@ -63,7 +63,11 @@ const Catalog = () => {
             <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
               <ProductList products={products} />
             </Grid>
-            <AppPagination greaterThanMd={greaterThanMd} metaData={metaData}/>
+            <AppPagination 
+              greaterThanMd={greaterThanMd} 
+              metaData={metaData}
+              onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))}
+            />
           </>
           :
           <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
