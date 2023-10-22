@@ -14,7 +14,7 @@ const AppPagination = ({greaterThanMd, metaData, onPageChange}: Props) => {
       { greaterThanMd && <Grid item md={3}/>}
         <Grid item xs={12} md={9}>
           <Box 
-            mt={2}
+            mt={{ xs: 2, md: 1 }}
             mb={2}
             display='flex' 
             justifyContent='space-between' 

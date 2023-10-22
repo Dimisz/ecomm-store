@@ -4,7 +4,7 @@ import { useState } from "react";
 import ProductSearch from "../search-field/ProductSearch";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import RadioButtonGroup from "../../../app/layout/radio-button-group/RadioButtonGroup";
-import { setProductParams } from "../catalogSlice";
+import { resetProductParams, setProductParams } from "../catalogSlice";
 import CheckboxButtonsGroup from "../../../app/layout/checkbox-buttons-group/CheckboxButtonsGroup";
 
 interface Props {
@@ -85,11 +85,18 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
               checked={checkedTypes}
               onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
             />
-            <Button 
-              onClick={toggleDrawer(false)} 
-              variant='outlined'
-              sx={{ display: 'block', marginLeft: 'auto'}}
-            >Close</Button>
+            <Box display='flex' justifyContent='flex-end' alignItems='center'>
+              <Button
+                onClick={() => dispatch(resetProductParams())}
+                variant='outlined'
+                sx={{ m: 1, mb: 0 }}
+              >Reset Filters</Button>
+              <Button
+                onClick={toggleDrawer(false)}
+                variant='outlined'
+                sx={{ m: 1, mb: 0 }}
+              >Close</Button>
+            </Box>
         </Paper>
       </Grid>
       </SwipeableDrawer>

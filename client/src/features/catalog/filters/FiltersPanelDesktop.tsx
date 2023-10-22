@@ -1,8 +1,8 @@
-import { Grid, Paper } from "@mui/material";
+import { Button, Grid, Paper } from "@mui/material";
 import ProductSearch from "../search-field/ProductSearch";
 import RadioButtonGroup from "../../../app/layout/radio-button-group/RadioButtonGroup";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { setProductParams } from "../catalogSlice";
+import { resetProductParams, setProductParams } from "../catalogSlice";
 import CheckboxButtonsGroup from "../../../app/layout/checkbox-buttons-group/CheckboxButtonsGroup";
 
 
@@ -40,7 +40,14 @@ const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrand
             checked={checkedTypes}
             onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
           />
-        </Paper>
+      </Paper>
+      <Button
+        onClick={() => dispatch(resetProductParams())}
+        variant='outlined'
+        fullWidth
+        // sx={{ m: 1, ml: 0 }}
+      >Reset Filters
+      </Button>
     </Grid>
   );
 }

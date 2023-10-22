@@ -35,7 +35,7 @@ const Catalog = () => {
 
   if(status.includes('pending')) return <Loader message='Loading products...' />;
   return(
-      <Grid container columnSpacing={3}>
+      <Grid container columnSpacing={3} spacing={1}>
         { greaterThanMd
           ? 
           <FiltersPanelDesktop 
