@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
+import { PaginatedResponse } from "../models/pagination";
 
 // timeout function for testing loading status indicators (<Loader />)
 // const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
@@ -14,6 +15,14 @@ axios.interceptors.response.use((response) => {
   // testing loaders
   // async (response) => {
   // await sleep();
+
+  // console.log(response);
+  const pagination = response.headers['pagination'];
+  if(pagination){
+    response.data = new PaginatedResponse(response.data, JSON.parse(pagination));
+    // console.log(response);
+    return response;
+  }
   return response;
 }, (error: AxiosError) => {
   const { data, status }:{data: any; status: number} = error.response as AxiosResponse;

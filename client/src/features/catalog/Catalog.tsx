@@ -4,9 +4,10 @@ import ProductList from "./ProductList";
 import Loader from '../../app/layout/Loader';
 import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
 import { fetchAllProductsAsync, fetchFiltersAsync, productSelectors } from './catalogSlice';
-import { Box, Grid, Pagination, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FiltersPanelDesktop from "./filters/FiltersPanelDesktop";
 import FiltersPanelMobile from "./filters/FiltersPanelMobile";
+import AppPagination from "../../app/layout/app-pagination/AppPagination";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -17,7 +18,7 @@ const sortOptions = [
 
 const Catalog = () => {
   const products = useAppSelector(productSelectors.selectAll);
-  const { productsLoaded, status, filtersLoaded, brands, types, productParams } = useAppSelector(state => state.catalog);
+  const { productsLoaded, status, filtersLoaded, brands, types, productParams, metaData } = useAppSelector(state => state.catalog);
 
   const dispatch = useAppDispatch();
 
@@ -55,29 +56,24 @@ const Catalog = () => {
             checkedTypes={productParams.types}
           /> 
         }
-        <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
+        {
+          metaData && metaData?.totalCount > 0 
+          ?
+          <>
+            <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
+              <ProductList products={products} />
+            </Grid>
+            <AppPagination greaterThanMd={greaterThanMd} metaData={metaData}/>
+          </>
+          :
+          <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
+              <Typography sx={{mt: {xs: 2, md: 5}}} variant="h6">No products found...</Typography>
+          </Grid>
+        }
+        {/* <Grid item xs={12} md={9} mt={{xs: -5, md: 0}}>
           <ProductList products={products} />
         </Grid>
-        { greaterThanMd && <Grid item md={3}/>}
-        <Grid item xs={12} md={9}>
-          <Box 
-            display='flex' 
-            justifyContent='space-between' 
-            alignItems='center' 
-            mb={2} 
-            flexDirection={{xs: 'column', md: 'row'}}>
-            <Typography sx={{marginTop: {xs: -1}}}>
-              Displaying 1-6 of 20 items
-            </Typography>
-            <Pagination
-              color='secondary'
-              size='large'
-              count={5}
-              page={2}
-              sx={{marginTop: {xs: 1, md: 0}}}
-            />
-          </Box>
-        </Grid>
+        <AppPagination greaterThanMd={greaterThanMd} metaData={metaData}/> */}
     </Grid>
   );
 }
