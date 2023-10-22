@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
 import ProductList from "./ProductList";
-import Loader from '../../app/layout/Loader';
 import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
 import { fetchAllProductsAsync, fetchFiltersAsync, productSelectors, setPageNumber } from './catalogSlice';
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FiltersPanelDesktop from "./filters/FiltersPanelDesktop";
 import FiltersPanelMobile from "./filters/FiltersPanelMobile";
 import AppPagination from "../../app/layout/app-pagination/AppPagination";
+import Loader from "../../app/layout/Loader";
 
 const sortOptions = [
   {value: 'name', label: 'Alphabetical'},
@@ -18,7 +18,7 @@ const sortOptions = [
 
 const Catalog = () => {
   const products = useAppSelector(productSelectors.selectAll);
-  const { productsLoaded, status, filtersLoaded, brands, types, productParams, metaData } = useAppSelector(state => state.catalog);
+  const { productsLoaded, filtersLoaded, brands, types, productParams, metaData } = useAppSelector(state => state.catalog);
 
   const dispatch = useAppDispatch();
 
@@ -33,7 +33,7 @@ const Catalog = () => {
     if(!filtersLoaded) dispatch(fetchFiltersAsync());
   }, [filtersLoaded, dispatch]);
 
-  if(status.includes('pending')) return <Loader message='Loading products...' />;
+  if(!filtersLoaded) return <Loader message='Loading products...' />;
   return(
       <Grid container columnSpacing={3} spacing={1}>
         { greaterThanMd

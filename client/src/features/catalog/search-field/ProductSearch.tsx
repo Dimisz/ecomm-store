@@ -15,8 +15,8 @@ const ProductSearch = () => {
   // }, 1000);
   const debouncedSearch = useMemo(
     () =>
-      debounce((event: any) => {
-        dispatch(setProductParams({ searchTerm: event.target.value }));
+      debounce((searchTerm: string) => {
+        dispatch(setProductParams({ searchTerm: searchTerm }));
       }, 1000),
     [dispatch]
   );
@@ -40,7 +40,7 @@ const ProductSearch = () => {
           // debouncedSearch func will send requests to API 
           // 1 second after the user stops typing
           // here will also use the onClick event 
-          debouncedSearch(event); 
+          debouncedSearch(event.target.value); 
         }}
         endAdornment={
           <InputAdornment position="end">
@@ -48,8 +48,12 @@ const ProductSearch = () => {
               searchTerm && searchTerm !== ''
               ?
               <IconButton
-                onClick={() => setSerchTerm('')}
-                aria-label="reset search input"
+                onClick={() => {
+                    setSerchTerm('');
+                    debouncedSearch(''); 
+                  }
+                }
+                aria-label="clear search input"
                 edge="end"
               >
                   <ClearOutlined/>
