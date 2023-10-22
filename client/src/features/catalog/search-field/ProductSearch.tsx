@@ -1,4 +1,4 @@
-import { Search } from "@mui/icons-material";
+import { ClearOutlined, Search } from "@mui/icons-material";
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, debounce } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/store/configureStore";
 import { setProductParams } from "../catalogSlice";
@@ -8,7 +8,7 @@ const ProductSearch = () => {
   const { productParams } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
-  const [searchTerm, setSerachTerm] = useState(productParams.searchTerm || '');
+  const [searchTerm, setSerchTerm] = useState(productParams.searchTerm || '');
 
   // const debouncedSearch = debounce((event: any) => {
   //   dispatch(setProductParams({searchTerm: event.target.value}));
@@ -36,7 +36,7 @@ const ProductSearch = () => {
         value={searchTerm}
 
         onChange={(event: any) => {
-          setSerachTerm(event.target.value);
+          setSerchTerm(event.target.value);
           // debouncedSearch func will send requests to API 
           // 1 second after the user stops typing
           // here will also use the onClick event 
@@ -44,13 +44,26 @@ const ProductSearch = () => {
         }}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton
-              onClick={() => dispatch(setProductParams({searchTerm: searchTerm}))}
-              aria-label="search products"
-              edge="end"
-            >
-              <Search/>
-            </IconButton>
+            {
+              searchTerm && searchTerm !== ''
+              ?
+              <IconButton
+                onClick={() => setSerchTerm('')}
+                aria-label="reset search input"
+                edge="end"
+              >
+                  <ClearOutlined/>
+              </IconButton>
+              :
+              // <IconButton
+              //   // onClick={() => dispatch(setProductParams({searchTerm: searchTerm}))}
+              //   aria-label="search products"
+              //   edge="end"
+              // >
+                <Search/>
+              // </IconButton>
+            }
+
           </InputAdornment>
         }
         label="Search Products"
