@@ -1,8 +1,8 @@
-import { Button, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import ProductSearch from "../search-field/ProductSearch";
 import RadioButtonGroup from "../../../app/layout/radio-button-group/RadioButtonGroup";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { resetProductParams, setProductParams } from "../catalogSlice";
+import { setProductParams } from "../catalogSlice";
 import CheckboxButtonsGroup from "../../../app/layout/checkbox-buttons-group/CheckboxButtonsGroup";
 
 
@@ -11,12 +11,13 @@ interface Props {
   brands: string[];
   types: string[];
   orderBy: string;
-  checkedBrands: string[] | undefined;
-  checkedTypes: string[] | undefined;
+  checkedBrands: string[];
+  checkedTypes: string[];
 }
 
 const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrands, checkedTypes }: Props) => {
   const dispatch = useAppDispatch();
+  
   return(
     <Grid item md={3}>
       <ProductSearch/>
@@ -41,13 +42,13 @@ const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrand
             onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
           />
       </Paper>
-      <Button
+      {/* <Button
         onClick={() => dispatch(resetProductParams())}
         variant='outlined'
         fullWidth
         // sx={{ m: 1, ml: 0 }}
       >Reset Filters
-      </Button>
+      </Button> */}
     </Grid>
   );
 }

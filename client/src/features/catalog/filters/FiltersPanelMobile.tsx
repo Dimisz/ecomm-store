@@ -19,7 +19,10 @@ interface Props {
 
 const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands, checkedTypes }: Props) => {
   const dispatch = useAppDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
+
+
   const toggleDrawer =
     (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -34,6 +37,7 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
 
       setIsOpen(open);
     };
+
   return(
     <Grid item xs={12}>
       <ProductSearch />
@@ -85,18 +89,11 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
               checked={checkedTypes}
               onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
             />
-            <Box display='flex' justifyContent='flex-end' alignItems='center'>
-              <Button
-                onClick={() => dispatch(resetProductParams())}
-                variant='outlined'
-                sx={{ m: 1, mb: 0 }}
-              >Reset Filters</Button>
-              <Button
+            <Button
                 onClick={toggleDrawer(false)}
                 variant='outlined'
-                sx={{ m: 1, mb: 0 }}
+                sx={{ m: 1, ml: 'auto', display: 'block' }}
               >Close</Button>
-            </Box>
         </Paper>
       </Grid>
       </SwipeableDrawer>

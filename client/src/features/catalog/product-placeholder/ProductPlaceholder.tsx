@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, CardHeader, Grid, Skeleton } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Grid, Skeleton } from "@mui/material";
 
 const ProductPlaceholder = () => {
   return(

@@ -8,8 +8,9 @@ interface Props {
 
 }
 const CheckboxButtonsGroup = ({items, checked, onChange}:Props) => {
+  
   const [checkedItems, setCheckedItems] = useState(checked || []);
-
+  
   const handleChecked = (value: string) => {
     const currentIndex = checkedItems.findIndex((item) => item === value);
     let newChecked: string[] = [];
