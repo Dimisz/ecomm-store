@@ -1,9 +1,10 @@
-import { Grid, Paper } from "@mui/material";
+import { Button, Grid, Paper } from "@mui/material";
 import ProductSearch from "../search-field/ProductSearch";
 import RadioButtonGroup from "../../../app/layout/radio-button-group/RadioButtonGroup";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { setProductParams } from "../catalogSlice";
+import { resetProductParams, setProductParams } from "../catalogSlice";
 import CheckboxButtonsGroup from "../../../app/layout/checkbox-buttons-group/CheckboxButtonsGroup";
+import { useState } from "react";
 
 
 interface Props {
@@ -17,7 +18,14 @@ interface Props {
 
 const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrands, checkedTypes }: Props) => {
   const dispatch = useAppDispatch();
-  
+
+  const [resettable, setResettable] = useState(false);
+
+  const handleReset = () => {
+    dispatch(resetProductParams());
+    setResettable(true);
+  }
+
   return(
     <Grid item md={3}>
       <ProductSearch/>
@@ -33,6 +41,8 @@ const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrand
           items={brands}
           checked={checkedBrands}
           onChange={(items: string[]) => dispatch(setProductParams({brands: items}))}
+          resettable={resettable}
+          setResettable={setResettable}
         />
       </Paper>
       <Paper sx={{mb: 2, p: 2}}>
@@ -40,15 +50,16 @@ const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrand
             items={types}
             checked={checkedTypes}
             onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
+            resettable={resettable}
+            setResettable={setResettable}
           />
       </Paper>
-      {/* <Button
-        onClick={() => dispatch(resetProductParams())}
-        variant='outlined'
-        fullWidth
-        // sx={{ m: 1, ml: 0 }}
-      >Reset Filters
-      </Button> */}
+      <Button
+          variant='outlined'
+          fullWidth
+          onClick={handleReset}
+        >Reset Filters
+        </Button>
     </Grid>
   );
 }

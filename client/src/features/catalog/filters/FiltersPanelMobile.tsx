@@ -22,6 +22,14 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [resettable, setResettable] = useState(false);
+
+  const handleReset = () => {
+    dispatch(resetProductParams());
+    setResettable(true);
+  }
+
+
 
   const toggleDrawer =
     (open: boolean) =>
@@ -78,6 +86,8 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
         </Paper>
         <Paper sx={{mb: 2, p: 2}}>
           <CheckboxButtonsGroup
+            resettable={resettable}
+            setResettable={setResettable}
             items={brands}
             checked={checkedBrands}
             onChange={(items: string[]) => dispatch(setProductParams({brands: items}))}
@@ -85,16 +95,30 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
         </Paper>
         <Paper sx={{mb: 2, p: 2}}>
             <CheckboxButtonsGroup
+              resettable={resettable}
+              setResettable={setResettable}
               items={types}
               checked={checkedTypes}
               onChange={(items: string[]) => dispatch(setProductParams({types: items}))}
             />
-            <Button
-                onClick={toggleDrawer(false)}
+            <Box display='flex' flexDirection='column' alignContent='space-between' justifyContent='space-between'>
+              <Button
+                sx={{m: 0, mb: 1, mt: 1}}
                 variant='outlined'
-                sx={{ m: 1, ml: 'auto', display: 'block' }}
+                color='warning'
+                onClick={handleReset}
+              >Reset Filters</Button>
+              <Button
+                sx={{m: 0, mb: 1, mt: 1}}
+                onClick={toggleDrawer(false)}
+                color='primary'
+                variant='outlined'
+                // sx={{ m: 1, ml: 'auto', display: 'block' }}
               >Close</Button>
+            </Box>
+
         </Paper>
+        
       </Grid>
       </SwipeableDrawer>
     </Grid>
