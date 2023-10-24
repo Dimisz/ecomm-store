@@ -2,17 +2,26 @@ import { ClearOutlined, Search } from "@mui/icons-material";
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, debounce } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/store/configureStore";
 import { setProductParams } from "../catalogSlice";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const ProductSearch = () => {
+interface Props {
+  resettable: boolean;
+  setResettable: (value: boolean) => void;
+}
+
+const ProductSearch = ({resettable, setResettable}: Props) => {
   const { productParams } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
   const [searchTerm, setSerchTerm] = useState(productParams.searchTerm || '');
 
-  // const debouncedSearch = debounce((event: any) => {
-  //   dispatch(setProductParams({searchTerm: event.target.value}));
-  // }, 1000);
+  useEffect(() => {
+    if(resettable){
+      setSerchTerm('');
+      setResettable(false);
+    }
+  }, [resettable]);
+
   const debouncedSearch = useMemo(
     () =>
       debounce((searchTerm: string) => {

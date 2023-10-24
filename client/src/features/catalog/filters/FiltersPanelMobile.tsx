@@ -48,7 +48,10 @@ const FiltersPanelMobile = ({ sortOptions, brands, types, orderBy, checkedBrands
 
   return(
     <Grid item xs={12}>
-      <ProductSearch />
+      <ProductSearch 
+        resettable={resettable}
+        setResettable={setResettable}
+      />
       <Box display='flex' alignItems='center' justifyContent='right'>
         <Typography>
           Filter by: 

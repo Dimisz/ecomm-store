@@ -28,7 +28,10 @@ const FiltersPanelDesktop = ({ sortOptions, brands, types, orderBy, checkedBrand
 
   return(
     <Grid item md={3}>
-      <ProductSearch/>
+      <ProductSearch
+        resettable={resettable}
+        setResettable={setResettable}
+      />
       <Paper sx={{mb: 2, p: 2}}>
         <RadioButtonGroup
           selectedValue={orderBy}
