@@ -1,6 +1,7 @@
 using API.Data;
 using API.Entities;
 using API.Middleware;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,12 +23,17 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 //configure CORS
 builder.Services.AddCors();
 // configure Identity
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddIdentityCore<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<StoreContext>();
 // configuring authentication and authorization
 builder.Services.AddAuthentication(); // to configure later
 builder.Services.AddAuthorization(); // to configure later
+builder.Services.AddScoped<TokenService>();
+
 
 var app = builder.Build();
 
