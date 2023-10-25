@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import my components
 import Header from "./layout/header/Header";
 // import ResponsiveAppBar from './layout/ResponsiveHeader';
@@ -9,10 +9,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { useStoreContext } from './context/StoreContext';
 import Loader from './layout/Loader';
-import { getCookie } from './util/util';
-import agent from './api/agent';
 import { useAppDispatch } from './store/configureStore';
-import { setCart } from '../features/cart/cartSlice';
+import { fetchCartAsync } from '../features/cart/cartSlice';
 import { fetchCurrentUser } from '../features/account/accountSlice';
 
 const App = () => {
@@ -20,22 +18,33 @@ const App = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const buyerId = getCookie('buyerId');
-    if(localStorage.getItem('user')){
-      dispatch(fetchCurrentUser());
+  const initApp = useCallback(async () => {
+    try {
+      await dispatch(fetchCurrentUser());
+      await dispatch(fetchCartAsync());
     }
-    
-    if(buyerId){
-      agent.Cart.get()
-        .then((cart) => dispatch(setCart(cart)))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
-    }
-    else {
-      setLoading(false);
+    catch(error) {
+      console.log(error);
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    initApp().then(() => setLoading(false));
+    // const buyerId = getCookie('buyerId');
+    // if(localStorage.getItem('user')){
+    //   dispatch(fetchCurrentUser());
+    // }
+    
+    // if(buyerId){
+    //   agent.Cart.get()
+    //     .then((cart) => dispatch(setCart(cart)))
+    //     .catch((error) => console.log(error))
+    //     .finally(() => setLoading(false));
+    // }
+    // else {
+    //   setLoading(false);
+    // }
+  }, [initApp]);
 
   const [darkMode, setDarkMode] = useState(true);
   const toggleTheme = () => {

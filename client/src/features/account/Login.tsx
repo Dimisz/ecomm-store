@@ -21,7 +21,7 @@ const Login = () =>  {
     register, 
     handleSubmit, 
     formState: {isSubmitting, errors, isValid} } = useForm({
-      mode: 'onTouched'
+      mode: 'onBlur'
     });
   
   const submitForm = async (data: FieldValues) => {
@@ -83,7 +83,7 @@ const Login = () =>  {
             </LoadingButton>
             <Grid container>
               <Grid item>
-                <Link to='register'>
+                <Link to='/register'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
