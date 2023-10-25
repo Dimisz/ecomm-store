@@ -1,6 +1,8 @@
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
 import { Badge, Box, IconButton, List, Toolbar, Typography } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "../../store/configureStore";
+import SignedInMenu from "../signed-in-menu/SignedInMenu";
 
 interface Props {
   darkMode: boolean;
@@ -19,6 +21,8 @@ const HeaderDesktop = ({
   rightSectionLinks,
   itemsCount
  }: Props) => {
+  const { user } = useAppSelector((state) => state.account);
+
   const renderedMidSectionLinks = renderLinks(midSectionLinks);
   const renderedRightSectionLinks = renderLinks(rightSectionLinks);
   return(
@@ -64,9 +68,15 @@ const HeaderDesktop = ({
                 <ShoppingCart />
               </Badge>
             </IconButton>
-            <List sx={{ display: 'flex' }}>
-             {renderedRightSectionLinks}
-            </List>
+            {
+              user
+              ?
+              <SignedInMenu />
+              : 
+              <List sx={{ display: 'flex' }}>
+                {renderedRightSectionLinks}
+              </List>
+            }
           </Box>
         </Toolbar>
   );

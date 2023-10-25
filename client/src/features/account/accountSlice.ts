@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { User } from "../../app/models/user";
 import { FieldValues } from "react-hook-form";
 import agent from "../../app/api/agent";
+import { router } from "../../app/router/Routes";
+import { toast } from "react-toastify";
 
 interface AccountState {
   user: User | null;
@@ -28,6 +30,7 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
 export const fetchCurrentUser = createAsyncThunk<User>(
   'account/fetchCurrentUser',
   async (_, thunkApi) => {
+    thunkApi.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
     try {
       const user = await agent.Account.currentUser();
       localStorage.setItem('user', JSON.stringify(user));
@@ -36,14 +39,35 @@ export const fetchCurrentUser = createAsyncThunk<User>(
     catch(error: any){
       return thunkApi.rejectWithValue({error: error.data});
     }
+  },
+  {
+    condition: () => {
+      if(!localStorage.getItem('user')){ return false;}
+    }
   }
 )
 
 export const accountSlice = createSlice({
   name: 'account',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    signOut: (state) => {
+      state.user = null;
+      localStorage.removeItem('user');
+      router.navigate('/');
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    }
+  },
   extraReducers: (builder => {
+    builder.addCase(fetchCurrentUser.rejected, (state) => {
+      state.user = null;
+      localStorage.removeItem('user');
+      toast.error('Session expired - please login again');
+      router.navigate('/');
+
+    })
     builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {
       state.user = action.payload;
     });
@@ -52,3 +76,5 @@ export const accountSlice = createSlice({
     })
   })
 })
+
+export const { signOut, setUser } = accountSlice.actions;

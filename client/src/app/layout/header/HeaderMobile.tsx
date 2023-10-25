@@ -4,6 +4,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "../../store/configureStore";
+import SignedInMenu from "../signed-in-menu/SignedInMenu";
 
 interface Props {
   darkMode: boolean;
@@ -22,6 +24,8 @@ const HeaderMobile = ({
   rightSectionLinks,
   itemsCount
  }: Props) => {
+  const { user } = useAppSelector((state) => state.account);
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -111,36 +115,45 @@ const HeaderMobile = ({
             <ShoppingCart />
           </Badge>
         </IconButton>
-        <IconButton
-          size="large"
-          aria-label="user account menu"
-          aria-controls="user-account-menu"
-          aria-haspopup="true"
-          onClick={handleOpenUserMenu}
-          color="inherit"
-        >
-          <Login />
-        </IconButton>
-        <Menu
-          id="user-account-menu"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
-        >
-          {renderLinks(rightSectionLinks, handleCloseUserMenu)}
-        </Menu>
+        {
+          user 
+          ?
+          <SignedInMenu/>
+          :
+          <>
+            <IconButton
+            size="large"
+            aria-label="user account menu"
+            aria-controls="user-account-menu"
+            aria-haspopup="true"
+            onClick={handleOpenUserMenu}
+            color="inherit"
+                    >
+              <Login />
+            </IconButton>
+            <Menu
+                id="user-account-menu"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+            >
+              {renderLinks(rightSectionLinks, handleCloseUserMenu)}
+            </Menu>
+          </>
+        }
+        
       </Box>
     </Toolbar>
   );
