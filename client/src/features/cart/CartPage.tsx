@@ -5,10 +5,10 @@ import CartPageMobile from "./CartPageMobile";
 
 const CartPage = () => {
   const theme = useTheme();
-  const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
+  const greaterThanMd = useMediaQuery(theme.breakpoints.up("md"));
   return(
     <>
-      { greaterThanSm ? <CartPageDesktop /> : <CartPageMobile/>}
+      { greaterThanMd ? <CartPageDesktop /> : <CartPageMobile/>}
     </>
   );
                       

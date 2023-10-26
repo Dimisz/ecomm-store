@@ -60,20 +60,15 @@ export const cartSlice = createSlice({
     setCart: (state, action) => {
       state.cart = action.payload
     },
+    clearCart: (state) => {
+      state.cart = null;
+    }
   },
   extraReducers: (builder => {
     builder.addCase(addCartItemAsync.pending, (state, action) => {
       // console.log(action);
       state.status = 'pendingAddItem' + action.meta.arg.productId;
     });
-    // builder.addCase(addCartItemAsync.fulfilled, (state, action) => {
-    //   state.cart = action.payload;
-    //   state.status = 'idle';
-    // });
-    // builder.addCase(addCartItemAsync.rejected, (state, action) => {
-    //   state.status = 'idle';
-    //   console.log(action.payload);
-    // });
     builder.addCase(removeCartItemAsync.pending, (state, action) => {
       state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
     });
@@ -104,4 +99,4 @@ export const cartSlice = createSlice({
   })
 })
 
-export const { setCart } = cartSlice.actions;
+export const { setCart, clearCart } = cartSlice.actions;

@@ -6,15 +6,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { IconButton, InputAdornment, Paper } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import agent from '../../app/api/agent';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 
 const Register = () =>  {
+  const navigate = useNavigate();
   //toggle password visibility func
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -71,6 +73,10 @@ const Register = () =>  {
             component="form" 
             onSubmit={
               handleSubmit((data) => agent.Account.register(data)
+              .then(() => {
+                toast.success('Registration successful - you can now log in!');
+                navigate('/login');
+              })
               .catch((error) => handleApiErrors(error)))
             } 
             noValidate sx={{ mt: 1 }}>
@@ -95,7 +101,7 @@ const Register = () =>  {
                 {
                   required: 'Email is required',
                   pattern: {
-                    value: /^\w+[\w-\.]*\@\w+((-\w+)|(\w*)).[a-z]{2,3}$/,
+                    value: /^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/,
                     message: 'Not a valid email address'
                   }
                 })
@@ -129,7 +135,7 @@ const Register = () =>  {
                   required: 'Password is required',
                   pattern: {
                     value: /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/,
-                    message: 'Password does not meet complexity requirements'
+                    message: 'Password should be at least 6 characters long and should contain at least one uppercase letter, one lowercase letter, one digit, and one non-alphanumeric symbol. Non-alphanumeric symbols: [-!"#$%&()*,./:;?@^_`{|}~+<=>]'
                   }
                 })
               }

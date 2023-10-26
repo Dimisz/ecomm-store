@@ -17,7 +17,7 @@ const CartPageDesktop = () => {
   const deliveryFee = subtotal > 0 && subtotal < 100 ? 5 : 0;
   
   return(
-    <Paper sx={{ width: '100%', overflow: 'hidden', display: {xs: 'none', md: 'flex'} }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', display: 'flex' }}>
         <TableContainer sx={{ maxHeight: '90vh' }}>
           <Table stickyHeader aria-label="products in the cart">
             <TableHead>
@@ -34,7 +34,7 @@ const CartPageDesktop = () => {
                 <TableRow key={item.productId} hover>
                   <TableCell scope="row">
                     <Box
-                      display={{ sx: 'none', md: 'flex'}}
+                      display='flex'
                       alignItems='center'
                     >
                       <img

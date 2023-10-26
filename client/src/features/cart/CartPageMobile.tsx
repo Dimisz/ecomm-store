@@ -25,7 +25,7 @@ const CartPageMobile = () => {
           sx={{
             maxHeight: '90vh',
             width: '100%',
-            display: {xs: 'flex', md: 'none', },
+            display: 'flex',
             flexDirection: 'column'
             }}
         >

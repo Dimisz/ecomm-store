@@ -4,6 +4,7 @@ import { FieldValues } from "react-hook-form";
 import agent from "../../app/api/agent";
 import { router } from "../../app/router/Routes";
 import { toast } from "react-toastify";
+import { setCart } from "../cart/cartSlice";
 
 interface AccountState {
   user: User | null;
@@ -17,7 +18,10 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
   'account/signInUser',
   async (data, thunkApi) => {
     try {
-      const user = await agent.Account.login(data);
+      const userDto = await agent.Account.login(data);
+      const { cart, ...user } = userDto;
+      if(cart) thunkApi.dispatch(setCart(cart));
+
       localStorage.setItem('user', JSON.stringify(user));
       return user;
     }
@@ -32,7 +36,10 @@ export const fetchCurrentUser = createAsyncThunk<User>(
   async (_, thunkApi) => {
     thunkApi.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
     try {
-      const user = await agent.Account.currentUser();
+      const userDto = await agent.Account.currentUser();
+      const { cart, ...user } = userDto;
+      if(cart) thunkApi.dispatch(setCart(cart));
+      
       localStorage.setItem('user', JSON.stringify(user));
       return user;
     }
