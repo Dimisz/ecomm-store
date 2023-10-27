@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace API.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
 
         // differentiating btw admin and user roles
         protected override void OnModelCreating(ModelBuilder builder)
