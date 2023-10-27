@@ -56,7 +56,7 @@ export const fetchCurrentUser = createAsyncThunk<User>(
 
 export const accountSlice = createSlice({
   name: 'account',
-  initialState: initialState,
+  initialState,
   reducers: {
     signOut: (state) => {
       state.user = null;
@@ -74,12 +74,12 @@ export const accountSlice = createSlice({
       toast.error('Session expired - please login again');
       router.navigate('/');
 
-    })
+    });
     builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {
       state.user = action.payload;
     });
     builder.addMatcher(isAnyOf(signInUser.rejected, fetchCurrentUser.rejected), (_state, action) => {
-      console.log(action.payload);
+      throw action.payload;
     })
   })
 })

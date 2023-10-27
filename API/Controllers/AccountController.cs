@@ -41,16 +41,17 @@ namespace API.Controllers
                 if (userCart != null)
                 {
                     _context.Carts.Remove(userCart);
-                    anonCart.BuyerId = user.UserName;
-                    Response.Cookies.Delete("buyerId");
-                    await _context.SaveChangesAsync();
                 }
+                anonCart.BuyerId = user.UserName;
+                Response.Cookies.Delete("buyerId");
+                await _context.SaveChangesAsync();
+
             }
             return new UserDto
             {
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
-                Cart = anonCart != null ? anonCart.MapCartToDto() : userCart.MapCartToDto()
+                Cart = anonCart != null ? anonCart.MapCartToDto() : userCart?.MapCartToDto()
             };
         }
 
@@ -64,7 +65,8 @@ namespace API.Controllers
             return await _context.Carts
                 .Include(i => i.Items)
                 .ThenInclude(p => p.Product)
-                .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+            // .FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+            .FirstOrDefaultAsync(cart => cart.BuyerId == buyerId);
         }
 
         [HttpPost("register")]
@@ -92,10 +94,12 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Cart userCart = await RetrieveCart(User.Identity.Name);
             return new UserDto
             {
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                Cart = userCart?.MapCartToDto()
             };
         }
 
