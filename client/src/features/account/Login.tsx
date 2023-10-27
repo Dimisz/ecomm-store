@@ -6,7 +6,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { IconButton, InputAdornment, Paper } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { useAppDispatch } from '../../app/store/configureStore';
@@ -17,6 +17,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Login = () =>  {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
 
   //toggle password visibility func
@@ -34,8 +35,13 @@ const Login = () =>  {
     });
   
   const submitForm = async (data: FieldValues) => {
-    await dispatch(signInUser(data));
-    navigate('/catalog');
+    try {
+      await dispatch(signInUser(data));
+      navigate(location.state?.from || '/catalog');
+    }
+    catch(error: any){
+      console.log(error);
+    }
   }
 
   return (
