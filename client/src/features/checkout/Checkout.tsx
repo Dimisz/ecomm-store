@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 
 
 const steps = ['Shipping address', 'Payment details', 'Review order'];
@@ -28,9 +29,13 @@ function getStepContent(step: number) {
 }
 
 const Checkout = () => {
+  const methods = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const handleNext = () => {
+  const handleNext = (data: FieldValues) => {
+    if(activeStep === 0){
+      console.log(data)
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -39,7 +44,7 @@ const Checkout = () => {
   };
 
   return (
-    <>
+    <FormProvider {...methods}>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
@@ -64,7 +69,7 @@ const Checkout = () => {
               </Typography>
             </>
           ) : (
-            <>
+            <form onSubmit={methods.handleSubmit(handleNext)}>
               {getStepContent(activeStep)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
@@ -74,17 +79,17 @@ const Checkout = () => {
                 )}
                 <Button
                   variant="contained"
-                  onClick={handleNext}
+                  type='submit'
                   sx={{ mt: 3, ml: 1 }}
                 >
                   {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                 </Button>
               </Box>
-            </>
+            </form>
           )}
         </Paper>
       </Container>
-    </>
+    </FormProvider>
   );
 }
 

@@ -88,9 +88,9 @@ namespace API.Controllers
                     Address1 = orderDto.ShippingAddress.Address1,
                     Address2 = orderDto.ShippingAddress.Address2,
                     City = orderDto.ShippingAddress.City,
-                    StateOrProvince = orderDto.ShippingAddress.StateOrProvince,
+                    State = orderDto.ShippingAddress.State,
                     Country = orderDto.ShippingAddress.Country,
-                    ZipOrPostalCode = orderDto.ShippingAddress.ZipOrPostalCode,
+                    Zip = orderDto.ShippingAddress.Zip,
                 };
                 _context.Update(user);
             }
