@@ -11,6 +11,8 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { validationSchema } from './checkoutValidation';
 
 
 const steps = ['Shipping address', 'Payment details', 'Review order'];
@@ -20,20 +22,25 @@ function getStepContent(step: number) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
-    case 2:
       return <Review />;
+    case 2:
+      return <PaymentForm />;
     default:
       throw new Error('Unknown step');
   }
 }
 
 const Checkout = () => {
-  const methods = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
+  const currentValidationSchema = validationSchema[activeStep];
+
+  const methods = useForm({
+    mode: 'all',
+    resolver: yupResolver(currentValidationSchema)
+  });
 
   const handleNext = (data: FieldValues) => {
-    if(activeStep === 0){
+    if(activeStep === 2){
       console.log(data)
     }
     setActiveStep(activeStep + 1);
@@ -78,6 +85,7 @@ const Checkout = () => {
                   </Button>
                 )}
                 <Button
+                  disabled={!methods.formState.isValid}
                   variant="contained"
                   type='submit'
                   sx={{ mt: 3, ml: 1 }}
