@@ -1,11 +1,23 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
 import { Order } from "../../app/models/order";
+import { useState } from "react";
+import OrderDetails from "./order-details/OrderDetails";
+
 
 interface Props {
   orders: Order[] | null;
 }
 
 const OrdersTableDesktop = ({orders}: Props) => {
+  const [selectedOrderId, setSelectedOrderId] = useState(0);
+  if(selectedOrderId > 0){
+    return(
+      <OrderDetails
+        order={orders?.find(o => o.id === selectedOrderId)!}
+        setSelectedOrderId={setSelectedOrderId}
+      />
+    )
+  }
   return(
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="list of orders" stickyHeader>
@@ -32,7 +44,7 @@ const OrdersTableDesktop = ({orders}: Props) => {
               <TableCell align="right">{order.date.split('T')[0]}</TableCell>
               <TableCell align="right">{order.orderStatus}</TableCell>
               <TableCell align="right">
-                <Button>View</Button>
+                <Button onClick={() => setSelectedOrderId(order.id)}>View</Button>
               </TableCell>
             </TableRow>
           ))}

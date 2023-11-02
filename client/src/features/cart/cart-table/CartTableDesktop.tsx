@@ -5,20 +5,24 @@ import { Link } from "react-router-dom";
 import CartSummary from "../CartSummary";
 import { removeCartItemAsync, addCartItemAsync } from "../cartSlice";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { Cart } from "../../../app/models/cart";
+import { CartItem } from "../../../app/models/cart";
 
 interface Props {
-  cart: Cart,
-  status: string,
+  items: CartItem[],
+  status?: string,
   subtotal: number;
   deliveryFee: number;
   isCart?: boolean;
+  title?: string;
 }
-const CartTableDesktop = ({ cart, status, subtotal, deliveryFee, isCart = true }: Props) => {
+const CartTableDesktop = ({ items, status, subtotal, deliveryFee, isCart = true, title = 'Order Details' }: Props) => {
   const dispatch = useAppDispatch();
   
   return(
     <TableContainer sx={{ maxHeight: '90vh' }}>
+          <Typography variant="h6" gutterBottom align='center'>
+              {title}
+          </Typography>
           <Table stickyHeader aria-label="products in the cart">
             <TableHead>
               <TableRow>
@@ -30,7 +34,7 @@ const CartTableDesktop = ({ cart, status, subtotal, deliveryFee, isCart = true }
               </TableRow>
             </TableHead>
             <TableBody>
-              {cart.items.map((item) => (
+              {items.map((item) => (
                 <TableRow key={item.productId} hover>
                   <TableCell scope="row">
                     <Box

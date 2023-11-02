@@ -1,12 +1,22 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, Typography } from "@mui/material"
 import { Order } from "../../app/models/order";
-import React from "react";
+import React, { useState } from "react";
+import OrderDetails from "./order-details/OrderDetails";
 
 interface Props {
   orders: Order[] | null;
 }
 
 const OrdersTableMobile = ({orders}:Props) => {
+  const [selectedOrderId, setSelectedOrderId] = useState(0);
+  if(selectedOrderId > 0){
+    return(
+      <OrderDetails
+        order={orders?.find(o => o.id === selectedOrderId)!}
+        setSelectedOrderId={setSelectedOrderId}
+      />
+    )
+  }
   return(
     <TableContainer component={Paper} sx={{maxHeight: '90vh'}}>
       <Table stickyHeader aria-label="list of orders">
@@ -42,7 +52,11 @@ const OrdersTableMobile = ({orders}:Props) => {
               </TableRow>
               <TableRow sx={{ mb: 5 }}> 
                   <TableCell colSpan={4}>
-                    <Button variant='outlined' fullWidth >View</Button>
+                    <Button 
+                      variant='outlined' 
+                      fullWidth 
+                      onClick={() => setSelectedOrderId(order.id)}
+                    >View</Button>
                   </TableCell>
               </TableRow>
             </React.Fragment>

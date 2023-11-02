@@ -2,20 +2,21 @@ import { DeleteForeverOutlined, RemoveCircleOutline, AddCircleOutline } from "@m
 import { LoadingButton } from "@mui/lab";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, Typography, TableBody, Card, CardMedia, Box, CardContent, Divider, TableFooter, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Cart } from "../../../app/models/cart";
+import { CartItem } from "../../../app/models/cart";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import CartSummary from "../CartSummary";
 import { removeCartItemAsync, addCartItemAsync } from "../cartSlice";
 
 interface Props {
-  cart: Cart,
-  status: string,
+  items: CartItem[],
+  status?: string,
   subtotal: number;
   deliveryFee: number;
   isCart?: boolean;
+  title?: string;
 }
 
-const CartTableMobile = ({ cart, status, subtotal, deliveryFee, isCart = true }: Props) => {
+const CartTableMobile = ({ items, status, subtotal, deliveryFee, isCart = true, title='Order Details' }: Props) => {
   const dispatch = useAppDispatch();
   return(
     <TableContainer
@@ -34,15 +35,15 @@ const CartTableMobile = ({ cart, status, subtotal, deliveryFee, isCart = true }:
                   {
                     isCart 
                     ?
-                    <Typography variant='h6'>Order Details</Typography>
+                    <Typography variant='h6'>{title}</Typography>
                     :
-                    <Typography variant='h6' align='left'>Order Summary</Typography>
+                    <Typography variant='h6' align='left'>{title}</Typography>
                   }
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {cart.items.map((item) => (
+              {items.map((item) => (
                 <TableRow
                   hover
                   key={item.productId}

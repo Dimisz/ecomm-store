@@ -1,5 +1,4 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import CartPageDesktop from '../cart/CartPageDesktop';
 import CartPageMobile from '../cart/CartPageMobile';
 
@@ -16,9 +15,6 @@ const Review = () => {
       { greaterThanMd 
         ? 
         <>
-          <Typography variant="h6" gutterBottom align='center'>
-            Order summary
-          </Typography>
           <CartPageDesktop isCart={false} />
         </>
         : 

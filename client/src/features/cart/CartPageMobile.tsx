@@ -17,7 +17,7 @@ const CartPageMobile = ({isCart = true}: Props) => {
   return(
       <>
         <CartTableMobile 
-          cart={cart} 
+          items={cart.items} 
           status={status} 
           subtotal={subtotal} 
           deliveryFee={deliveryFee}

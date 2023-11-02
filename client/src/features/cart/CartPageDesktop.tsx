@@ -19,7 +19,8 @@ const CartPageDesktop = ({isCart = true}: Props) => {
   return(
     <Paper sx={{ width: '100%', overflow: 'hidden', display: 'flex' }}>
         <CartTableDesktop 
-          cart={cart} 
+          title='Order Details'
+          items={cart.items} 
           status={status} 
           subtotal={subtotal} 
           deliveryFee={deliveryFee} 
