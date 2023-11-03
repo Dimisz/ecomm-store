@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import TableFooterRow from "./TableFooterRow";
+import { formatCurrency } from "../../app/util/util";
 
 interface Props {
   subtotal: number;
@@ -12,19 +13,19 @@ const CartSummary = ({subtotal, deliveryFee} : Props) => {
             <TableFooterRow>
               <>
                 <Typography variant="h6">Subtotal</Typography>
-                <Typography variant="h6">${subtotal}</Typography>
+                <Typography variant="h6">${formatCurrency(subtotal).toFixed(2)}</Typography>
               </>
             </TableFooterRow>
             <TableFooterRow>
               <>
                 <Typography variant="h6">Delivery Fee*</Typography>
-                <Typography variant="h6">${deliveryFee}</Typography>
+                <Typography variant="h6">${formatCurrency(deliveryFee).toFixed(2)}</Typography>
               </>
             </TableFooterRow>
             <TableFooterRow>
               <>
                 <Typography variant="h6">Total</Typography>
-                <Typography variant="h6">${subtotal + deliveryFee}</Typography>
+                <Typography variant="h6">${formatCurrency(subtotal + deliveryFee).toFixed(2)}</Typography>
               </>
             </TableFooterRow>
             <TableFooterRow>

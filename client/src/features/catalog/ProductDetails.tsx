@@ -8,6 +8,7 @@ import { LoadingButton } from "@mui/lab";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addCartItemAsync, removeCartItemAsync } from "../cart/cartSlice";
 import { fetchProductAsync, productSelectors } from "./catalogSlice";
+import { formatCurrency } from "../../app/util/util";
 
 const ProductDetails = () => {
   const { cart, status } = useAppSelector((state) => state.cart);
@@ -74,7 +75,7 @@ const ProductDetails = () => {
         </Typography>
         <Divider sx={{ mb: 2 }}/>
         <Typography variant='h5' color='secondary'>
-          ${product.price.toFixed(2)}
+          ${formatCurrency(product.price).toFixed(2)}
         </Typography>
         <TableContainer>
           <Table>

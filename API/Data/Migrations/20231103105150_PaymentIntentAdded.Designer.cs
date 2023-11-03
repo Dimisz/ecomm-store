@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20231102052248_PaymentIntentAdded")]
+    [Migration("20231103105150_PaymentIntentAdded")]
     partial class PaymentIntentAdded
     {
         /// <inheritdoc />

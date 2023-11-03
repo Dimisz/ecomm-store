@@ -17,7 +17,7 @@ namespace API.Services
             var service = new PaymentIntentService();
             var intent = new PaymentIntent();
             var subtotal = cart.Items.Sum(item => item.Quantity * item.Product.Price);
-            var deliveryFee = subtotal > 100 ? 0 : 5;
+            var deliveryFee = subtotal > 10000 ? 0 : 500;
             if (string.IsNullOrEmpty(cart.PaymentIntentId))
             {
                 var options = new PaymentIntentCreateOptions

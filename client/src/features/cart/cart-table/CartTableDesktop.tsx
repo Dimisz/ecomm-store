@@ -6,6 +6,7 @@ import CartSummary from "../CartSummary";
 import { removeCartItemAsync, addCartItemAsync } from "../cartSlice";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { CartItem } from "../../../app/models/cart";
+import { formatCurrency } from "../../../app/util/util";
 
 interface Props {
   items: CartItem[],
@@ -53,7 +54,7 @@ const CartTableDesktop = ({ items, status, subtotal, deliveryFee, isCart = true,
                       <Typography variant='h6'>{item.name}</Typography>
                     </Box>
                   </TableCell>
-                  <TableCell align="center">${(item.price).toFixed(2)}</TableCell>
+                  <TableCell align="center">${formatCurrency(item.price).toFixed(2)}</TableCell>
                   <TableCell align="center">
                     <Box display='flex' alignItems='center' justifyContent='center'>
                       { isCart &&
@@ -83,7 +84,7 @@ const CartTableDesktop = ({ items, status, subtotal, deliveryFee, isCart = true,
                       }
                     </Box>
                   </TableCell>
-                  <TableCell align="center">${(item.price * item.quantity).toFixed(2)}</TableCell>
+                  <TableCell align="center">${formatCurrency(item.price * item.quantity).toFixed(2)}</TableCell>
                   { isCart &&
                     <TableCell align="center">
                       <LoadingButton 

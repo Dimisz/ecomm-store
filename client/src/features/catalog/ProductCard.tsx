@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addCartItemAsync } from "../cart/cartSlice";
+import { formatCurrency } from "../../app/util/util";
 
 interface Props {
   product: Product;
@@ -44,7 +45,7 @@ const ProductCard = ({product}: Props) => {
           />
           <CardContent sx={{ flexGrow: 1, pt: 0, pb: 0 }}>
             <Typography gutterBottom color='secondary' variant="h6">
-              ${product.price.toFixed(2)}
+              ${formatCurrency(product.price).toFixed(2)}
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {product.brand} / {product.type}

@@ -36,7 +36,7 @@ namespace API.Data
                     Name = "Brown Brim",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/ZYW3VTp/brown-brim.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -47,7 +47,7 @@ namespace API.Data
                     Name = "Blue Beanie",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 18,
+                    Price = 1800,
                     PictureUrl = "https://i.ibb.co/ypkgK0X/blue-beanie.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -58,7 +58,7 @@ namespace API.Data
                     Name = "Brown Cowboy",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 35,
+                    Price = 3500,
                     PictureUrl = "https://i.ibb.co/QdJwgmp/brown-cowboy.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -70,7 +70,7 @@ namespace API.Data
                     Name = "Grey Brim",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/RjBLWxB/grey-brim.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -81,7 +81,7 @@ namespace API.Data
                     Name = "Green Beanie",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 18,
+                    Price = 1800,
                     PictureUrl = "https://i.ibb.co/YTjW3vF/green-beanie.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -93,7 +93,7 @@ namespace API.Data
                     Name = "Palm Tree Cap",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 14,
+                    Price = 1400,
                     PictureUrl = "https://i.ibb.co/rKBDvJX/palm-tree-cap.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -104,7 +104,7 @@ namespace API.Data
                     Name = "Red Beanie",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 18,
+                    Price = 1800,
                     PictureUrl = "https://i.ibb.co/bLB646Z/red-beanie.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -115,7 +115,7 @@ namespace API.Data
                     Name = "Wolf Cap",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 14,
+                    Price = 1400,
                     PictureUrl = "https://i.ibb.co/1f2nWMM/wolf-cap.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -126,7 +126,7 @@ namespace API.Data
                     Name = "Blue Snapback",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 16,
+                    Price = 1600,
                     PictureUrl = "https://i.ibb.co/X2VJP2W/blue-snapback.png",
                     Brand = "Generic",
                     Type = "Hats",
@@ -137,7 +137,7 @@ namespace API.Data
                     Name = "Adidas NMD",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 220,
+                    Price = 22000,
                     PictureUrl = "https://i.ibb.co/0s3pdnc/adidas-nmd.png",
                     Brand = "Adidas",
                     Type = "Sneakers",
@@ -148,7 +148,7 @@ namespace API.Data
                     Name = "Adidas Yeezy",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 280,
+                    Price = 28000,
                     PictureUrl = "https://i.ibb.co/dJbG1cT/yeezy.png",
                     Brand = "Adidas",
                     Type = "Sneakers",
@@ -159,7 +159,7 @@ namespace API.Data
                     Name = "Black Converse",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 110,
+                    Price = 11000,
                     PictureUrl = "https://i.ibb.co/bPmVXyP/black-converse.png",
                     Brand = "Converse",
                     Type = "Sneakers",
@@ -170,7 +170,7 @@ namespace API.Data
                     Name = "Nike White AirForce",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 160,
+                    Price = 16000,
                     PictureUrl = "https://i.ibb.co/1RcFPk0/white-nike-high-tops.png",
                     Brand = "Nike",
                     Type = "Sneakers",
@@ -181,7 +181,7 @@ namespace API.Data
                     Name = "Nike Red High Tops",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 160,
+                    Price = 16000,
                     PictureUrl = "https://i.ibb.co/QcvzydB/nikes-red.png",
                     Brand = "Nike",
                     Type = "Sneakers",
@@ -192,7 +192,7 @@ namespace API.Data
                     Name = "Nike Brown High Tops",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 160,
+                    Price = 16000,
                     PictureUrl = "https://i.ibb.co/fMTV342/nike-brown.png",
                     Brand = "Nike",
                     Type = "Sneakers",
@@ -203,7 +203,7 @@ namespace API.Data
                     Name = "Air Jordan Limited",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 190,
+                    Price = 19000,
                     PictureUrl = "https://i.ibb.co/w4k6Ws9/nike-funky.png",
                     Brand = "Nike",
                     Type = "Sneakers",
@@ -214,7 +214,7 @@ namespace API.Data
                     Name = "Timberlands",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 200,
+                    Price = 20000,
                     PictureUrl = "https://i.ibb.co/Mhh6wBg/timberlands.png",
                     Brand = "Timberlands",
                     Type = "Sneakers",
@@ -225,7 +225,7 @@ namespace API.Data
                     Name = "Black Jean Shearling",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 125,
+                    Price = 12500,
                     PictureUrl = "https://i.ibb.co/XzcwL5s/black-shearling.png",
                     Brand = "Generic",
                     Type = "Jackets",
@@ -236,7 +236,7 @@ namespace API.Data
                     Name = "Blue Jean Jacket",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 90,
+                    Price = 9000,
                     PictureUrl = "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
                     Brand = "Generic",
                     Type = "Jackets",
@@ -247,7 +247,7 @@ namespace API.Data
                     Name = "Grey Jean Jacket",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 90,
+                    Price = 9000,
                     PictureUrl = "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
                     Brand = "Generic",
                     Type = "Jackets",
@@ -258,7 +258,7 @@ namespace API.Data
                     Name = "Brown Shearling",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 165,
+                    Price = 16500,
                     PictureUrl = "https://i.ibb.co/s96FpdP/brown-shearling.png",
                     Brand = "Generic",
                     Type = "Jackets",
@@ -269,7 +269,7 @@ namespace API.Data
                     Name = "Tan Trench",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 185,
+                    Price = 18500,
                     PictureUrl = "https://i.ibb.co/M6hHc3F/brown-trench.png",
                     Brand = "Generic",
                     Type = "Jackets",
@@ -280,7 +280,7 @@ namespace API.Data
                     Name = "Blue Tanktop",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/7CQVJNm/blue-tank.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -291,7 +291,7 @@ namespace API.Data
                     Name = "Floral Blouse",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 20,
+                    Price = 2000,
                     PictureUrl = "https://i.ibb.co/4W2DGKm/floral-blouse.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -302,7 +302,7 @@ namespace API.Data
                     Name = "Floral Dress",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 30,
+                    Price = 3000,
                     PictureUrl = "https://i.ibb.co/KV18Ysr/floral-skirt.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -313,7 +313,7 @@ namespace API.Data
                     Name = "Red Dots Dress",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 80,
+                    Price = 8000,
                     PictureUrl = "https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -324,7 +324,7 @@ namespace API.Data
                     Name = "Striped Sweater",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 45,
+                    Price = 4500,
                     PictureUrl = "https://i.ibb.co/KmSkMbH/striped-sweater.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -335,7 +335,7 @@ namespace API.Data
                     Name = "Yellow Track Suit",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 135,
+                    Price = 13500,
                     PictureUrl = "https://i.ibb.co/v1cvwNf/yellow-track-suit.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -346,7 +346,7 @@ namespace API.Data
                     Name = "White Blouse",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 20,
+                    Price = 2000,
                     PictureUrl = "https://i.ibb.co/qBcrsJg/white-vest.png",
                     Brand = "Generic",
                     Type = "Womens",
@@ -357,7 +357,7 @@ namespace API.Data
                     Name = "Camo Down Vest",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 325,
+                    Price = 32500,
                     PictureUrl = "https://i.ibb.co/xJS0T3Y/camo-vest.png",
                     Brand = "Generic",
                     Type = "Mens",
@@ -368,7 +368,7 @@ namespace API.Data
                     Name = "Floral T-shirt",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 20,
+                    Price = 2000,
                     PictureUrl = "https://i.ibb.co/qMQ75QZ/floral-shirt.png",
                     Brand = "Generic",
                     Type = "Mens",
@@ -379,7 +379,7 @@ namespace API.Data
                     Name = "Black & White Longsleeve",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/55z32tw/long-sleeve.png",
                     Brand = "Generic",
                     Type = "Mens",
@@ -390,7 +390,7 @@ namespace API.Data
                     Name = "Pink T-shirt",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/RvwnBL8/pink-shirt.png",
                     Brand = "Generic",
                     Type = "Mens",
@@ -401,7 +401,7 @@ namespace API.Data
                     Name = "Jean Long Sleeve",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 40,
+                    Price = 4000,
                     PictureUrl = "https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png",
                     Brand = "Generic",
                     Type = "Mens",
@@ -412,7 +412,7 @@ namespace API.Data
                     Name = "Burgundy T-shirt",
                     Description =
                                     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 25,
+                    Price = 2500,
                     PictureUrl = "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
                     Brand = "Generic",
                     Type = "Mens",

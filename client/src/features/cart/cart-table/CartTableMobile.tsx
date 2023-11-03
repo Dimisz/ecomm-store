@@ -6,6 +6,7 @@ import { CartItem } from "../../../app/models/cart";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import CartSummary from "../CartSummary";
 import { removeCartItemAsync, addCartItemAsync } from "../cartSlice";
+import { formatCurrency } from "../../../app/util/util";
 
 interface Props {
   items: CartItem[],
@@ -100,7 +101,7 @@ const CartTableMobile = ({ items, status, subtotal, deliveryFee, isCart = true, 
                               component="h3"
                               sx={{ fontSize: { xs: '0.9rem', sm: '1.8rem', lineHeight: 1.1 }}}
                             >
-                              ${(item.price).toFixed(2)}
+                              ${formatCurrency(item.price).toFixed(2)}
                             </Typography>
                           </Box>
                           { isCart &&
@@ -137,7 +138,7 @@ const CartTableMobile = ({ items, status, subtotal, deliveryFee, isCart = true, 
                                 sx={{ fontStyle: 'italic' }}
                               >Subtotal:</Typography>
                               <Typography variant='body1' ml={{ sm: 2 }}>
-                                ${(item.price * item.quantity).toFixed(2)}
+                                ${formatCurrency(item.price * item.quantity).toFixed(2)}
                               </Typography>
                           </Box>
                           

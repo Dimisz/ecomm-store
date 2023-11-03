@@ -65,7 +65,7 @@ namespace API.Controllers
             }
 
             long subtotal = items.Sum(item => item.Price * item.Quantity);
-            long deliveryFee = subtotal > 100 ? 0 : 5;
+            long deliveryFee = subtotal > 10000 ? 0 : 500;
 
             var order = new Order
             {
