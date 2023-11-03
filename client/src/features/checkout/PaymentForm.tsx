@@ -5,11 +5,9 @@ import { useFormContext } from 'react-hook-form';
 import AppTextInput from '../../app/layout/app-text-input/AppTextInput';
 import { CardCvcElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js';
 import { StripeInput } from './StripeInput';
-import { useTheme } from '@mui/material';
 
 const PaymentForm = () => {
-  const theme = useTheme();
-  console.log(theme);
+
   const { control } = useFormContext();
   return (
     <>

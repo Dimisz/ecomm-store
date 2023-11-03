@@ -1,4 +1,4 @@
-import { InputBaseComponentProps } from "@mui/material";
+import { InputBaseComponentProps, useTheme } from "@mui/material";
 import { Ref, forwardRef, useImperativeHandle, useRef } from "react";
 
 interface Props extends InputBaseComponentProps{}
@@ -10,9 +10,17 @@ export const StripeInput =
       focus: () => elementRef.current.focus
     }));
 
+    const theme = useTheme();
     return(
       <Component 
         onReady={(element: any) => elementRef.current = element}
+        options={{
+          style: {
+            base: {
+              color: theme.palette.text.primary
+            }
+          }
+        }}
         {...props}
       />
     )
