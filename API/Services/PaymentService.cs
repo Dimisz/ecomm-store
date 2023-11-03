@@ -27,8 +27,8 @@ namespace API.Services
                     PaymentMethodTypes = new List<string> { "card" }
                 };
                 intent = await service.CreateAsync(options);
-                cart.PaymentIntentId = intent.Id;
-                cart.ClientSecret = intent.ClientSecret;
+                // cart.PaymentIntentId = intent.Id;
+                // cart.ClientSecret = intent.ClientSecret;
             }
             else
             {
