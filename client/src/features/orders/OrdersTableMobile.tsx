@@ -2,6 +2,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import { Order } from "../../app/models/order";
 import React, { useState } from "react";
 import OrderDetails from "./order-details/OrderDetails";
+import { formatCurrency } from "../../app/util/util";
 
 interface Props {
   orders: Order[] | null;
@@ -40,7 +41,7 @@ const OrdersTableMobile = ({orders}:Props) => {
               </TableRow>
               <TableRow hover>
                 <TableCell align="left">Total</TableCell>
-                <TableCell align="left">${order.total.toFixed(2)}</TableCell>
+                <TableCell align="left">${formatCurrency(order.total).toFixed(2)}</TableCell>
               </TableRow>
               <TableRow hover>
                 <TableCell align="left">Date</TableCell>

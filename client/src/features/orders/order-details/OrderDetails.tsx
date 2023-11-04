@@ -3,6 +3,7 @@ import { CartItem } from "../../../app/models/cart";
 import { Order } from "../../../app/models/order";
 import CartTableDesktop from "../../cart/cart-table/CartTableDesktop";
 import CartTableMobile from "../../cart/cart-table/CartTableMobile";
+import { formatCurrency } from "../../../app/util/util";
 
 interface Props {
   order: Order;

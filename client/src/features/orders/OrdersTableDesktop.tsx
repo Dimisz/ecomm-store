@@ -2,6 +2,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import { Order } from "../../app/models/order";
 import { useState } from "react";
 import OrderDetails from "./order-details/OrderDetails";
+import { formatCurrency } from "../../app/util/util";
 
 
 interface Props {
@@ -40,7 +41,7 @@ const OrdersTableDesktop = ({orders}: Props) => {
               <TableCell component="th" scope="row">
                 {order.id}
               </TableCell>
-              <TableCell align="right">${order.total.toFixed(2)}</TableCell>
+              <TableCell align="right">${formatCurrency(order.total).toFixed(2)}</TableCell>
               <TableCell align="right">{order.date.split('T')[0]}</TableCell>
               <TableCell align="right">{order.orderStatus}</TableCell>
               <TableCell align="right">
