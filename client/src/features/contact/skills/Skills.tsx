@@ -1,23 +1,24 @@
 import { ExpandMore } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
-import CertificationLink from "./CertificationLink";
-import { certifications } from "../../data";
+import SkillsSection from "./SkillsSection";
+import { skills } from "../data";
 
 
 
-const Certifications = () => {
+const Skills = () => {
   const [expanded, setExpanded] = useState(true);
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
-  const titleFontSize = greaterThanSm ? 'h5' : 'h6';
+  // const bodyTextVariant = greaterThanSm ? 'h6' : 'body1';
+  const titleVariant = greaterThanSm ? 'h5' : 'h6';
 
-  const renderedLinks = certifications.map((cert) => {
+
+  const renderedSkills = skills.map((skill:{ title:string; skillsList:string[]; }) => {
     return(
-      <CertificationLink key={cert.content} title={cert.title} content={cert.content}/>
+      <SkillsSection skill={skill} key={skill.title}/>   
     )
-  })
-  
+  });
   return(
     <Accordion expanded={expanded}>
         <AccordionSummary
@@ -26,12 +27,13 @@ const Certifications = () => {
           id="education-header"
           onClick={() => setExpanded(!expanded)}
         >
-          <Typography variant={titleFontSize}>Courses & Certifications</Typography>
+          <Typography variant={titleVariant}>Skills</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {renderedLinks}
+          {renderedSkills}
         </AccordionDetails>
       </Accordion>
   )
 }
-export default Certifications;
+
+export default Skills;

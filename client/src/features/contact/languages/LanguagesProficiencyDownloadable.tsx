@@ -1,26 +1,12 @@
-import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { useState } from "react";
-
-const LanguagesProficiency = () => {
-  const [expanded, setExpanded] = useState(true);
-
-  const theme = useTheme();
-  const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
-  const textFontSize = greaterThanSm ? 'h6' : 'body1';
-  const titleFontSize = greaterThanSm ? 'h5' : 'h6';
+import { Box, Divider, Typography } from "@mui/material";
+const LanguagesProficiencyDownloadable = () => {
+  const textFontSize = 'body1';
+  const titleFontSize = 'h5';
 
   return(
-    <Accordion expanded={expanded}>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="education-content"
-          id="education-header"
-          onClick={() => setExpanded(!expanded)}
-        >
-          <Typography variant={titleFontSize}>Languages Proficiency</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+    <Box pt={2} pb={2} pl={4} pr={4}>
+        <Typography variant={titleFontSize}>Languages Proficiency</Typography>
+        <Box>
             <Box display='flex' justifyContent='space-between'>
               <Typography variant={textFontSize}>
               Ukranian, Belarusian, Russian
@@ -34,11 +20,8 @@ const LanguagesProficiency = () => {
               <Typography variant={textFontSize}>
               English
               </Typography>
-              <Typography variant={textFontSize} display={{xs: 'none', sm:'block'}}>
+              <Typography variant={textFontSize}>
                 Fluent (TOEFL Score 115)
-              </Typography>
-              <Typography variant={textFontSize} display={{sm: 'none'}}>
-                Fluent
               </Typography>
             </Box>
             <Divider/>
@@ -60,8 +43,8 @@ const LanguagesProficiency = () => {
               </Typography>
             </Box>
 
-        </AccordionDetails>
-      </Accordion>
+        </Box>
+      </Box>
   )
 }
-export default LanguagesProficiency;
+export default LanguagesProficiencyDownloadable;

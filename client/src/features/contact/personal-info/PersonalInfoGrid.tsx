@@ -17,17 +17,20 @@ const info = [
   { label: 'WeChat:', content: 'vladimirsolovyov87' },
 ];
 
-const renderedInfo = info.map((item) => {
-  return(
-    <PersonalInfoGridRow 
-      key={item.label}
-      label={item.label} 
-      content={item.content} 
-    />
-  )
-});
 
-const PersonalInfoGrid = () => {
+interface Props {isDownloadable?: boolean;}
+
+const PersonalInfoGrid = ({isDownloadable=false}:Props) => {
+  const renderedInfo = info.map((item) => {
+    return(
+      <PersonalInfoGridRow 
+        key={item.label}
+        label={item.label} 
+        content={item.content} 
+        isDownloadable={isDownloadable}
+      />
+    )
+  });
   return(
     <Grid container>
       {renderedInfo}

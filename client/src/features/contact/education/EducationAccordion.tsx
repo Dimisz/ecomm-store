@@ -1,11 +1,14 @@
 import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
 
 const EducationAccordion = () => {
   const [expanded, setExpanded] = useState(true);
-  const titleVariant = 'h6';
-  const bodyTextVariant = 'body1'
+  const theme = useTheme();
+  const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
+  const bodyTextVariant = greaterThanSm ? 'h6' : 'body1';
+  const titleVariant = greaterThanSm ? 'h5' : 'h6';
+
   return(
     <Accordion expanded={expanded}>
         <AccordionSummary

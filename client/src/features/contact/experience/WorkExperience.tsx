@@ -1,23 +1,22 @@
-import { ExpandMore } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Typography, useMediaQuery, useTheme } from "@mui/material";
+import JobSection from "./JobSection";
+import { ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
-import CertificationLink from "./CertificationLink";
-import { certifications } from "../../data";
+import { jobDescriptions } from "../data";
 
+const renderedJobs = jobDescriptions.map((job) => {
+  return(
+    <JobSection job={job} key={job.companyName}/>
+  );
+})
 
-
-const Certifications = () => {
+const WorkExperience = () => {
   const [expanded, setExpanded] = useState(true);
+
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
   const titleFontSize = greaterThanSm ? 'h5' : 'h6';
 
-  const renderedLinks = certifications.map((cert) => {
-    return(
-      <CertificationLink key={cert.content} title={cert.title} content={cert.content}/>
-    )
-  })
-  
   return(
     <Accordion expanded={expanded}>
         <AccordionSummary
@@ -26,12 +25,12 @@ const Certifications = () => {
           id="education-header"
           onClick={() => setExpanded(!expanded)}
         >
-          <Typography variant={titleFontSize}>Courses & Certifications</Typography>
+          <Typography variant={titleFontSize}>Work Experience</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {renderedLinks}
+          {renderedJobs}
         </AccordionDetails>
       </Accordion>
   )
 }
-export default Certifications;
+export default WorkExperience;
