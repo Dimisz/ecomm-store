@@ -1,33 +1,37 @@
-import { Button, ButtonGroup, Typography } from "@mui/material";
+import { Avatar, Box, Button, ButtonGroup, Grid, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { usePDF } from "react-to-pdf";
+import DesktopHeader from "./header/DesktopHeader";
+import MobileHeader from "./header/MobileHeader";
+import EducationAccordion from "./education/EducationAccordion";
+import LanguagesProficiency from "./languages/LanguagesProficiency";
+import Certifications from "./education/certifications-links/Certifications";
 
-import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { decrement, increment } from "./counterSlice";
 
 const ContactPage = () => {
-  const dispatch = useAppDispatch();
-  const { data, title } = useAppSelector(state => state.counter);
-
+  const { toPDF, targetRef } = usePDF({filename: 'cv.pdf'});
+  const theme = useTheme();
+  const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
+  
   return(
     <>
-      <Typography variant='h2'>
-        {title}
-      </Typography>
-      <Typography variant='h2'>
-        Data is {data}
-      </Typography>
-      <ButtonGroup>
-        <Button 
-          onClick={() => dispatch(decrement(1))}
-          variant='contained' 
-          color='error'
-        >Decrement</Button>
-        <Button 
-          onClick={() => dispatch(increment(1))}
-          variant='contained' color='primary'>Increment</Button>
-        <Button 
-          onClick={() => dispatch(increment(5))}
-          variant='contained' color='secondary'>Increment by 5</Button>
-      </ButtonGroup>
+      <Paper ref={targetRef} sx={{ pt: 2 }}>
+        {
+          greaterThanSm
+          ?
+          <DesktopHeader/>
+          :
+          <MobileHeader/>
+        }
+        <EducationAccordion/>
+        <Certifications/>
+        <LanguagesProficiency/>
+      </Paper>
+      <Button
+      onClick={() => toPDF()}
+      variant='outlined'
+        >
+      Donload as PDF
+        </Button>
     </>
   );
 }
