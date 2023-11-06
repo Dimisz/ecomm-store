@@ -1,17 +1,16 @@
-import { Box, Link, Typography } from "@mui/material"
+import { Link } from "@mui/material"
 import { ReactNode } from "react";
 
 interface Props {
   content: string;
   label: string;
   icon: ReactNode | null;
-  isDownloadable?: boolean;
 }
 
-const LinksRow = ({ content, label, icon, isDownloadable=false }: Props) => {
-  const align = isDownloadable ? 'left' : 'right';
-  const pl = isDownloadable ? 0 : 3;
-  const pr = isDownloadable ? 2 : 0;
+const LinksRow = ({ content, label, icon }: Props) => {
+  const align = 'right';
+  const pl = 3;
+  
   return(
         <Link 
           href={content} 
@@ -23,16 +22,7 @@ const LinksRow = ({ content, label, icon, isDownloadable=false }: Props) => {
           pl={pl}
           aria-label={`View ${label} profile`}
         >
-          {
-            isDownloadable
-            ?
-            <Box display='flex' alignItems='center'>
-              <Typography variant='h6' pr={pr}>{label}:</Typography>
-              <Typography variant='body1' fontStyle='italic'>{content}</Typography>
-            </Box>
-            :
-            <>{ icon }</>
-          }
+          { icon }
         </Link>
 
   );

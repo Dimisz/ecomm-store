@@ -6,7 +6,7 @@ const EducationDownloadable = () => {
   const bodyTextVariant = 'body1';
 
   return(
-    <Box pt={1} pb={2} pl={4} pr={4}>
+    <Box pl={4} pr={4} pb={2} pt={2}>
         <Typography variant={headerVariant}>Education</Typography>
         <Box>
           <Box display='flex' justifyContent='space-between'>

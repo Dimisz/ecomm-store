@@ -7,7 +7,7 @@ import { certifications } from "../../data";
 
 
 const Certifications = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
   const titleFontSize = greaterThanSm ? 'h5' : 'h6';

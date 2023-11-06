@@ -1,38 +1,33 @@
 import { GitHub, LinkedIn } from "@mui/icons-material";
 import { Grid } from "@mui/material";
-import LinksRow from "./LinksRow";
+import DownloadableLinksRow from "./DownloadableLinkRow";
 
-
-const Links = () => {
+const DownloadableLinks = () => {
   const links = [
     { label: 'GitHub', content: 'https://github.com/Dimisz' , icon: <GitHub/> },
     { label: 'LinkedIn', content: 'https://www.linkedin.com/in/vladimir-solovyov-6b7136222/' , icon: <LinkedIn /> },
   ];
 
-  const alignContent = 'center';
-  const justifyContent = 'right';
-  const sm = 4 ;
-
   const renderedHeader = links.map((link) => {
     return(
-      <LinksRow 
+      <DownloadableLinksRow 
         key={link.content}
         content={link.content} 
         label={link.label}
-        icon={link.icon} 
       />
     )
   })
   return(
     <Grid 
-      container xs={12} sm={sm}
+      container xs={12}
       display='flex' 
-      alignContent={alignContent} 
-      justifyContent={justifyContent}
+      flexDirection='column'
+      alignContent='flex-start' 
+      justifyContent='flex-start'
     >
       {renderedHeader}
     </Grid>
   );
 }
 
-export default Links;
+export default DownloadableLinks;

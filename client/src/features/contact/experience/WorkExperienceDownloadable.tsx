@@ -12,7 +12,7 @@ const WorkExperienceDownloadable = () => {
   
 
   return(
-    <Box pt={2} pb={2} pl={4} pr={4}>
+    <Box pl={4} pr={4} pb={2} pt={1}>
       <Typography variant='h5'>Work Experience</Typography>
       <Box>
         {renderedJobs}

@@ -5,9 +5,9 @@ interface Props {
   content: string;
 }
 
-const PersonalInfoGridRow = ({label, content }: Props) => {
-  const xs = 12;
-  const justifyContent = {xs: 'space-between', sm: 'flex-start'};
+const DownloadableGridRow = ({label, content }: Props) => {
+  const xs = 6;
+  const justifyContent = 'flex-start';
   return(
     <Grid 
       item 
@@ -26,4 +26,4 @@ const PersonalInfoGridRow = ({label, content }: Props) => {
   );
 }
 
-export default PersonalInfoGridRow;
+export default DownloadableGridRow;

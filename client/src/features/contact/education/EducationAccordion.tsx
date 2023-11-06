@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography
 import { useState } from "react";
 
 const EducationAccordion = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
   const bodyTextVariant = greaterThanSm ? 'h6' : 'body1';

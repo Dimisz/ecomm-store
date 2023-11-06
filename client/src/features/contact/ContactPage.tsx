@@ -1,36 +1,31 @@
-import { Button, Paper, useMediaQuery, useTheme } from "@mui/material";
-import { usePDF } from "react-to-pdf";
-import DesktopHeader from "./header/DesktopHeader";
+import CV from './downloadable-cv/ReactDevCV_VladimirSolovyov.pdf';
+
+import { Button, Link, Paper, useMediaQuery, useTheme } from "@mui/material";
+// import { usePDF } from "react-to-pdf";
+
 import MobileHeader from "./header/MobileHeader";
 import EducationAccordion from "./education/EducationAccordion";
 import LanguagesProficiency from "./languages/LanguagesProficiency";
 import Certifications from "./education/certifications-links/Certifications";
 import WorkExperience from "./experience/WorkExperience";
 import Skills from "./skills/Skills";
-import DownloadableCV from "./downloadable-cv/DownloadableCV";
-import { useState } from "react";
-
+// import DownloadableCV from "./downloadable-cv/DownloadableCV";
+import DesktopHeader from "./header/DesktopHeader";
 
 
 const ContactPage = () => {
-  const { toPDF, targetRef } = usePDF({filename: 'cv.pdf'});
+  // const { toPDF, targetRef } = usePDF({filename: 'ReactDevCV_VladimirSolovyov.pdf'});
+  //  onClick={() => toPDF()}
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
   
-  const [isDownloading, setIsDownloading] = useState(false);
-  
-  const handleDownload = () => {
-    setIsDownloading(true);
-    setTimeout(() => console.log('Downloading...'), 1000);
-    toPDF();
-    setIsDownloading(false);
-  }
 
   return(
     <>
-      <Paper ref={targetRef} sx={{ pt: 2, position: 'fixed', bottom: 1000 }}>
+      {/* <Paper ref={targetRef} sx={{ pt: 2, position: 'fixed', bottom: 1000 
+        }}>
         <DownloadableCV/>
-      </Paper>
+      </Paper> */}
       
       <Paper sx={{ pt: 2 }}>
         {
@@ -40,19 +35,26 @@ const ContactPage = () => {
           :
           <MobileHeader/>
         }
+        <WorkExperience />
         <EducationAccordion/>
         <Certifications/>
-        <LanguagesProficiency/>
-        <WorkExperience />
         <Skills/>
+        <LanguagesProficiency/>
       </Paper>
-      <Button
-        onClick={handleDownload}
-        variant='outlined'
-        fullWidth
+      
+      <Link 
+        href={CV}
+        download='ReactDevCV_VladimirSolovyov'
+        target='_blank'
+        rel='noreferrer'
       >
-        Download as PDF
-      </Button>
+        <Button
+          variant='contained'
+          fullWidth
+        >
+          Download as PDF
+        </Button>
+      </Link>
     </>
   );
 }

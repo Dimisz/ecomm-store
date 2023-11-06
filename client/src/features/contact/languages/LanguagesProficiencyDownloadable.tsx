@@ -4,8 +4,8 @@ const LanguagesProficiencyDownloadable = () => {
   const titleFontSize = 'h5';
 
   return(
-    <Box pt={2} pb={2} pl={4} pr={4}>
-        <Typography variant={titleFontSize}>Languages Proficiency</Typography>
+    <Box pl={4} pr={4} pb={2} pt={2}>
+        <Typography variant={titleFontSize}>Languages</Typography>
         <Box>
             <Box display='flex' justifyContent='space-between'>
               <Typography variant={textFontSize}>

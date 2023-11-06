@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography
 import { useState } from "react";
 
 const LanguagesProficiency = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const theme = useTheme();
   const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));

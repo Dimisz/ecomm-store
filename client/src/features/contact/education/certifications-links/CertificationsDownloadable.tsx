@@ -11,7 +11,7 @@ const CertificationsDownloadable = () => {
   })
   
   return(
-    <Box pt={1} pb={2} pl={4} pr={4}>
+    <Box pl={4} pr={4} pb={2} pt={2}>
       <Typography variant='h5'>Courses & Certifications</Typography>
       <Box>
         {renderedLinks}

@@ -11,7 +11,7 @@ const SkillsDownloadable = () => {
     )
   });
   return(
-    <Box pt={2} pb={2} pl={4} pr={4}>
+    <Box pl={4} pr={4} pb={2} pt={2}>
       <Typography variant='h5'>Skills</Typography>
       <Box>
         {renderedSkills}

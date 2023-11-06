@@ -1,9 +1,10 @@
-import DesktopHeader from "../header/DesktopHeader";
 import EducationDownloadable from "../education/EducationDownloadable";
 import CertificationsDownloadable from "../education/certifications-links/CertificationsDownloadable";
 import LanguagesProficiencyDownloadable from "../languages/LanguagesProficiencyDownloadable";
 import WorkExperienceDownloadable from "../experience/WorkExperienceDownloadable";
 import SkillsDownloadable from "../skills/SkillsDownloadable";
+import DownloadableHeader from "../header/downloadable-header/DownloadableHeader";
+
 
 // export const { toPDF, targetRef } = usePDF({filename: 'myCv.pdf'});
 
@@ -13,12 +14,14 @@ const DownloadableCV = () => {
   return(
     <>
     {/* <Paper ref={targetRef} sx={{ pt: 2 }}> */}
-      <DesktopHeader isDownloadable={true}/>
+      <DownloadableHeader/>
+      <WorkExperienceDownloadable/>
       <EducationDownloadable/>
       <CertificationsDownloadable />
-      <LanguagesProficiencyDownloadable />
-      <WorkExperienceDownloadable/>
       <SkillsDownloadable/>
+      <LanguagesProficiencyDownloadable />
+      
+      
     {/* </Paper> */}
     </>
   );

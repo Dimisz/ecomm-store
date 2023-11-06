@@ -93,3 +93,10 @@ export const skills = [
     ]
   }
 ];
+
+export const contactInfo = [
+  { label: 'Address:', content: 'Shenzhen, China' },
+  { label: 'Phone:', content: '136 9214 2331' },
+  { label: 'Email:', content: 'dimishenz@gmail.com' },
+  { label: 'WeChat:', content: 'vladimirsolovyov87' },
+];

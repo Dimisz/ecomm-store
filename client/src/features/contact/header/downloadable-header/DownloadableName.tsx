@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 
-const Name = () => {
-  const fontSize =  {xs: '1.4rem', sm: '2.5rem', md: '3rem'};
+const DownloadableName = () => {
+  const fontSize = '3rem';
   return(
     <Grid item>
       <Typography align="left" sx={{ fontSize: fontSize }}>
@@ -11,4 +11,4 @@ const Name = () => {
   )
 }
 
-export default Name;
+export default DownloadableName;
