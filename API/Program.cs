@@ -91,6 +91,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+//deployment config
+app.UseDefaultFiles();
+app.UseStaticFiles();
 // adding allowed hosts
 app.UseCors(opt =>
 {
@@ -101,7 +104,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapFallbackToController("Index", "Fallback");
 // populating the products into the db
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();

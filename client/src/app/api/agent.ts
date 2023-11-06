@@ -7,7 +7,7 @@ import { store } from "../store/configureStore";
 // timeout function for testing loading status indicators (<Loader />)
 // const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
 
-axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 const responseBody = (response: AxiosResponse) => response.data;
