@@ -6,15 +6,13 @@ interface Props {
 }
 
 const PersonalInfoGridRow = ({label, content }: Props) => {
-  const xs = 12;
-  const justifyContent = {xs: 'space-between', sm: 'flex-start'};
   return(
     <Grid 
       item 
-      xs={xs} sm={6}
+      xs={12} md={6}
       display='flex' 
       alignItems='center' 
-      justifyContent={justifyContent}
+      justifyContent={{xs: 'space-between', md: 'flex-start'}}
     >
       <Typography variant='h6' align="left" pr={2}>
         {label}

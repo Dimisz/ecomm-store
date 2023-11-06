@@ -8,9 +8,6 @@ interface Props {
 }
 
 const LinksRow = ({ content, label, icon }: Props) => {
-  const align = 'right';
-  const pl = 3;
-  
   return(
         <Link 
           href={content} 
@@ -18,8 +15,8 @@ const LinksRow = ({ content, label, icon }: Props) => {
           target='_blank' 
           underline="none" 
           color='inherit' 
-          align={align}
-          pl={pl}
+          align='right'
+          pl={3}
           aria-label={`View ${label} profile`}
         >
           { icon }

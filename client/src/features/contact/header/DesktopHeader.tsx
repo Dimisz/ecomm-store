@@ -16,7 +16,7 @@ const DesktopHeader = () => {
               <Avatar
                 alt="Vladimir Solovyov"
                 src="https://avatars.githubusercontent.com/u/53788781?s=400&u=fd4ba406c620cb21c2a6f444312b5e022d0b5e4f&v=4"
-                style={{ height: '10rem', width: '10rem'}}
+                style={{ height: '12rem', width: '12rem'}}
               />
             </Box>
           </Grid>

@@ -8,7 +8,7 @@ import { useAppSelector } from "../../store/configureStore";
 const midSectionLinks = [
   { title: 'catalog', path: '/catalog' },
   { title: 'about', path: '/about' },
-  { title: 'contact', path: '/contact' }
+  { title: 'contact/cv', path: '/contact' }
 ];
 
 const rightSectionLinks = [

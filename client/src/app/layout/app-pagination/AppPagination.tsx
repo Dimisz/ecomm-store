@@ -8,6 +8,8 @@ interface Props {
 }
 
 const AppPagination = ({greaterThanMd, metaData, onPageChange}: Props) => {
+  const paginationSize = greaterThanMd ? 'large' : 'medium';
+   
   const {currentPage, totalCount, totalPages, pageSize} = metaData;
   return(
     <>
@@ -28,7 +30,7 @@ const AppPagination = ({greaterThanMd, metaData, onPageChange}: Props) => {
               </Typography>
             <Pagination
               color='secondary'
-              size='large'
+              size={paginationSize}
               count={totalPages || 0}
               page={currentPage || 0}
               sx={{marginTop: { xs: 1 }, marginBottom: { xs: 1}}}

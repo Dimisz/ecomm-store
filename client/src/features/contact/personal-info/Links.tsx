@@ -11,7 +11,6 @@ const Links = () => {
 
   const alignContent = 'center';
   const justifyContent = 'right';
-  const sm = 4 ;
 
   const renderedHeader = links.map((link) => {
     return(
@@ -25,7 +24,7 @@ const Links = () => {
   })
   return(
     <Grid 
-      container xs={12} sm={sm}
+      container xs={12} md={4}
       display='flex' 
       alignContent={alignContent} 
       justifyContent={justifyContent}

@@ -17,7 +17,7 @@ const ContactPage = () => {
   // const { toPDF, targetRef } = usePDF({filename: 'ReactDevCV_VladimirSolovyov.pdf'});
   //  onClick={() => toPDF()}
   const theme = useTheme();
-  const greaterThanSm = useMediaQuery(theme.breakpoints.up("sm"));
+  const greaterThanMd = useMediaQuery(theme.breakpoints.up("md"));
   
 
   return(
@@ -29,7 +29,7 @@ const ContactPage = () => {
       
       <Paper sx={{ pt: 2 }}>
         {
-          greaterThanSm
+          greaterThanMd
           ?
           <DesktopHeader/>
           :

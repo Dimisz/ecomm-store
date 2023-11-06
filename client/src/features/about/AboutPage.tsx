@@ -52,7 +52,7 @@ const AboutPage = () => {
         Testing:
       </Typography>
       <Typography variant='h6'>Signing In & Signing Up</Typography>
-      <Typography variant='body1' align='justify' pb={1}>Only signed in users are able to test payment functionality. However in order to check filtering, sorting, and cart-management creating an account is not required. Anonymous cart is created which later is transfered to a user upon signing-in.</Typography>
+      <Typography variant='body1' align='justify' pb={1}>Only signed in users are able to test payment functionality. However in order to check filtering, sorting, and cart-management an account is not required. Anonymous cart is created which later is transfered to a user upon signing-in.</Typography>
       <Typography variant='body1' align='justify'>Any email address (e.g. test@mail.com) will suffice to create an account and log in.</Typography>
       <Divider/>
       <Typography variant='h6' pt={2}>Payments</Typography>
@@ -67,7 +67,7 @@ const AboutPage = () => {
           color='inherit'
         >
         <Typography variant='body1' align='justify'>
-          Please, follow Stripe guidelines to test payments integration.
+          Follow Stripe guidelines to test payments integration.
         </Typography> 
         <Launch/>
       </Link> 
@@ -83,13 +83,13 @@ const AboutPage = () => {
           color='inherit'
         >
         <Typography variant='body1' align='justify'>
-          Please, use the test banking cards listed here to test declined payments.
+          Use the test banking cards listed here to test declined payments.
         </Typography> 
         <Launch/>
       </Link> 
       <Divider/>
       <Typography variant='h6' pt={2}>Admin Mode</Typography>
-      <Typography variant='body1' align='justify' pt={1}>Please, contact me at dimishenz@gmail.com and I'll provide the appropriate credentials to test the administrator mode.</Typography>
+      <Typography variant='body1' align='justify' pt={1}>Contact me at dimishenz@gmail.com and I'll provide the appropriate credentials to test the administrator mode.</Typography>
       <Divider/>
     </Paper>
   );
