@@ -121,9 +121,9 @@ export const catalogSlice = createSlice({
       state.status = 'idle';
       state.productsLoaded = true;
     });
-    builder.addCase(fetchAllProductsAsync.rejected, (state, action) => {
+    builder.addCase(fetchAllProductsAsync.rejected, (state) => {
       state.status = 'idle';
-      console.log(action.payload);
+      // console.log(action.payload);
     });
     builder.addCase(fetchProductAsync.pending, (state) => {
       state.status = 'pendingFetchProduct';

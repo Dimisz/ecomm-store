@@ -1,6 +1,8 @@
 import { Launch } from "@mui/icons-material";
 import { Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+
+
 // import Slider from "react-slick";
 
 const HomePage = () => {
@@ -52,7 +54,7 @@ const HomePage = () => {
         to='/register'
         aria-label='Go to the registration form'
       >
-        <Typography variant='body1' align='justify'>Create an account and login to test payments integration. Even a fake email address will suffice (e.g. test@test.com)</Typography>
+        <Typography variant='body1' align='justify'>Create an account and login to test payments integration. Even a non-existent email address will suffice (e.g. test@test.com)</Typography>
         <Launch />
       </Link>
 
@@ -62,14 +64,6 @@ const HomePage = () => {
         aria-label='View the about page'
       >
         <Typography variant='body1' align='justify'>You may find more technical details about the app on the About page</Typography>
-        <Launch />
-      </Link>
-      <Link 
-        style={{display: 'flex', color: 'inherit', textDecoration: 'none', paddingTop: '1rem'}}
-        to='/contact'
-        aria-label='View catalog of products'
-      >
-        <Typography variant='body1' align='justify'>My contact details and CV are on the Contact / CV page</Typography>
         <Launch />
       </Link>
     </Paper>
