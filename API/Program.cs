@@ -47,7 +47,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
     // connection string added in appsettings.Development.json
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    // opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 //configure CORS
