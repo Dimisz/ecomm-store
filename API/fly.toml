@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for ekomm on 2023-11-10T16:30:55+08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "ekomm"
+primary_region = "atl"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  StripeSettings__PublishableKey="pk_test_51O7qiQJLrKiodSguGQ66BDpwrWegh1CC4kxKGcIwmkoiihMS8ybJ6J6qgO2T8QD16toID66Qhp0QAfDSTMKcjNek003Lxgs9Z2"
+
+[build]
+  image = "dimisz/restore:latest"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
