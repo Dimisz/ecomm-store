@@ -21,7 +21,7 @@ const AboutPage = () => {
             API:
           </Typography>
           <Typography variant='body1' fontStyle='italic'>
-            C#, ASP.NET, Entity, Identity
+            C#, ASP.NET, Entity, Identity, PosgreSQL
           </Typography>
         </Box>
         <Box>
@@ -29,7 +29,7 @@ const AboutPage = () => {
             Client Side:
           </Typography>
           <Typography variant='body1' fontStyle='italic'>
-            Typescript, React, Redux, RTQ, Material UI
+            Typescript, React, Redux, Material UI
           </Typography>
         </Box>
       </Box>
@@ -40,7 +40,7 @@ const AboutPage = () => {
         Testing:
       </Typography>
       <Typography variant='h6'>Signing In & Signing Up</Typography>
-      <Typography variant='body1' align='justify' pb={1}>Only signed in users are able to test payment functionality. However in order to check filtering, sorting, and cart-management an account is not required. Anonymous cart is created which later is transfered to a user upon signing-in.</Typography>
+      <Typography variant='body1' align='justify' pb={1}>Only signed in users are able to test payment functionality. However in order to check search, filtering, sorting, and cart-management an account is not required. Anonymous cart is created which later is transfered to a user upon signing-in.</Typography>
       <Typography variant='body1' align='justify'>Even a non-existent email address (e.g. test@test.com) will suffice to create an account and log in.</Typography>
       <Divider/>
       <Typography variant='h6' pt={2}>Payments</Typography>
@@ -76,9 +76,6 @@ const AboutPage = () => {
         <Launch/>
       </Link> 
       <Divider/>
-      <Typography variant='h6' pt={2}>Admin Mode</Typography>
-      <Typography variant='body1' align='justify' pt={1}>Feel free to contact me at dimishenz@gmail.com.</Typography>
-      <Divider/>
       <Link 
           pt={1}
           display='flex' alignContent='center'
@@ -94,8 +91,6 @@ const AboutPage = () => {
           </Typography>
           <Launch/>
       </Link> 
-      
-      
     </Paper>
   );
 }

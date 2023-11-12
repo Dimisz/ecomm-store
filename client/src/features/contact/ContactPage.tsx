@@ -5,7 +5,8 @@ const ContactPage = () => {
 
   return(
     <Paper sx={{p: 2}}>
-      <Typography variant='h5'>Contacts Page</Typography>
+      <Typography variant='h5'>Email</Typography>
+      <Typography variant='body1'>dimishenz@gmail.com</Typography>
     </Paper>
   );
 }
