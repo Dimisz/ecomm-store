@@ -12,8 +12,8 @@ const AboutPage = () => {
 
       <Box 
         display='flex' 
-        alignItems={{xs: 'flex-start', md: 'center'}} 
-        flexDirection={{xs: 'column', md: 'row'}} 
+        alignItems={{xs: 'flex-start', sm: 'center'}} 
+        flexDirection={{xs: 'column', sm: 'row'}} 
         justifyContent='space-between'
       >
         <Box>
@@ -21,7 +21,7 @@ const AboutPage = () => {
             API:
           </Typography>
           <Typography variant='body1' fontStyle='italic'>
-            C#, ASP.NET, Entity, Identity, PosgreSQL
+            C#, ASP.NET, PosgreSQL
           </Typography>
         </Box>
         <Box>
@@ -77,16 +77,16 @@ const AboutPage = () => {
       </Link> 
       <Divider/>
       <Link 
-          pt={1}
-          display='flex' alignContent='center'
+          pt={3}
+          display='flex' alignContent='center' alignItems='center' justifyContent='center'
           href='https://github.com/Dimisz/ecomm-store'
           target='_blank'
           rel='noopener'
           aria-label='Visit GitHub repo to see the source code of the project'
           underline='none'
-          color='inherit'
+          color='primary'
         >
-          <Typography variant='body1' align='justify' >
+          <Typography variant='h6' align='justify' >
             View Source Code
           </Typography>
           <Launch/>
