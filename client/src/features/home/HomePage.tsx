@@ -35,7 +35,7 @@ const HomePage = () => {
     // </>
     <Paper sx={{p: 2}}>
       <Typography variant='h5' align='center' pt={2} pb={2}>
-        Hi there! My name is Vladimir and I'm a React Developer.
+        Hi there! My name is Vladimir and I'm a Fullstack Developer (.NET | React).
       </Typography>
       <Typography variant='body1' align='justify' pt={2} pb={2}>
       This is supposed to be a landing page of an eCommerce Store. But since it's my portfolio project, not a real store, I may as well provide some guidance on using and testing the web app instead of putting yet another fancy component here.

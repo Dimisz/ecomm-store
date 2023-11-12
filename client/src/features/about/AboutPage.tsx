@@ -77,7 +77,7 @@ const AboutPage = () => {
       </Link> 
       <Divider/>
       <Typography variant='h6' pt={2}>Admin Mode</Typography>
-      <Typography variant='body1' align='justify' pt={1}>Contact me at dimishenz@gmail.com and I'll provide the appropriate credentials to test the administrator mode.</Typography>
+      <Typography variant='body1' align='justify' pt={1}>Feel free to contact me at dimishenz@gmail.com.</Typography>
       <Divider/>
       <Link 
           pt={1}
